@@ -22,7 +22,45 @@ ember install ecs-components
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+### Development Mode
+
+```
+yarn install
+```
+
+On the project to use this addon:
+```
+yarn add ~/Direction/to/addon
+```
+
+```
+ember serve
+```
+
+### To include in on your project
+
+package.json
+```
+"devDependencies": {
+  "ecs-components": "git+https://github.com/ecaresoft/ecs-components.git#branch-to-use"
+}
+```
+
+### Available Components
+
+#### ecs input
+
+Simple input to mut value, uses the same focus on Cirrus & Nimbo
+
+```
+  {{ecs-input
+      classNames=(local-class "local-class") // CSS modules
+      value=model.attr
+      placeholder=(t "placeholder")
+      type="text"
+      dataAutoId="data-auto-id-to-use"
+    }}
+```
 
 
 Contributing
