@@ -1,0 +1,5 @@
+@value --is-mobile: screen and (max-width: 768px);
+@value --print-mobile: print and (max-width: 480px);
+@value --is-tablet: screen and (max-width: 992px);
+@value --is-laptop: screen and (max-width: 1260px);
+@value --is-desktop: screen and (min-width: 993px);

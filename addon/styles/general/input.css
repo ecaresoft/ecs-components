@@ -1,0 +1,44 @@
+@value light-gray, teal, focus-shadow-dark, focus-shadow-normal from 'colors';
+
+:global(.ecs-input),
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  height: 42px;
+  padding: 6px 12px;
+  border: 1px solid light-gray;
+  border-radius: 4px;
+  box-shadow: none;
+  font: normal 14px / 1.4 'Proxima Nova', Helvetica, Arial, sans-serif;
+  transition: border-color 150ms ease-in-out, box-shadow 150ms ease-in-out;
+
+  &::placeholder {
+    font-size: 15px;
+    font-weight: 300;
+    color: light-gray;
+  }
+
+  &:focus {
+    outline: 0 none;
+    border-color: teal;
+    box-shadow: 0 1px 1px focus-shadow-dark inset, 0 0 2px focus-shadow-normal;
+  }
+
+  &:global(.small) {
+    padding: 3px 10px;
+    height: 35px;
+  }
+
+  &[disabled] {
+    opacity: 1;
+    background-color: white;
+    cursor: not-allowed;
+  }
+
+  &:global(.search) {
+    margin: 0;
+  }
+}
