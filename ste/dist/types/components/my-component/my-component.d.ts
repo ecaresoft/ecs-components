@@ -1,0 +1,36 @@
+export declare class MyComponent {
+    first: string;
+    middle: string;
+    last: string;
+    estatura: number;
+    peso: number;
+    masa_corporal: number;
+    temperatura: number;
+    frecuencia_respiratoria: number;
+    sistolica: number;
+    diastolica: number;
+    frecuencia_cardiaca: number;
+    porcentaje_grasa_corporal: number;
+    consulta_seleccionada: number;
+    name: string;
+    url_api_nimbo_vital_signs: string;
+    token_api_nimbo_vital_signs: string;
+    vital_signs_data: string;
+    vital_signs_set_id: number;
+    vital_signs_consultation_id: number;
+    vital_signs_person_id: number;
+    imgSrc: string;
+    private getText;
+    consultaApiNimbo(): Promise<any>;
+    componentWillLoad(): void;
+    private getEstatura;
+    private getPeso;
+    private getMasa;
+    private getTemperatura;
+    private getFrecuenciaRespiratoria;
+    private getSistolica;
+    private getDiastolica;
+    private getFrecuenciaCardiaca;
+    private getIcon;
+    render(): any;
+}
