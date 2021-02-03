@@ -16,10 +16,13 @@ export namespace Components {
         "imgSrc": string;
         "last": string;
         "masa_corporal": number;
+        "masa_muscular": number;
         "middle": string;
         "name": string;
+        "perimetro_cefalico": number;
         "peso": number;
         "porcentaje_grasa_corporal": number;
+        "saturacion_oxigeno": number;
         "sistolica": number;
         "temperatura": number;
         "token_api_nimbo_vital_signs": string;
@@ -61,10 +64,13 @@ declare namespace LocalJSX {
         "imgSrc"?: string;
         "last"?: string;
         "masa_corporal"?: number;
+        "masa_muscular"?: number;
         "middle"?: string;
         "name"?: string;
+        "perimetro_cefalico"?: number;
         "peso"?: number;
         "porcentaje_grasa_corporal"?: number;
+        "saturacion_oxigeno"?: number;
         "sistolica"?: number;
         "temperatura"?: number;
         "token_api_nimbo_vital_signs"?: string;
