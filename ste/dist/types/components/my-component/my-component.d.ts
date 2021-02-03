@@ -27,6 +27,7 @@ export declare class MyComponent {
     componentWillLoad(): void;
     private getEstatura;
     private getPeso;
+    private extraerSignoVital;
     private getMasa;
     private getTemperatura;
     private getFrecuenciaRespiratoria;
