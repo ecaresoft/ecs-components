@@ -55,7 +55,7 @@ export class MyComponent {
   async consultaApiNimbo() {
     this.vital_signs_person_id = 661303
     this.url_api_nimbo_vital_signs = "https://nimbox-api-staging.herokuapp.com/api/v1/people/" + this.vital_signs_person_id + "/vital_signs_sets"
-    this.token_api_nimbo_vital_signs = 'Bearer 21f40f426080847a01d8e96ecacbef0d255eada71903a74dfd891eb9e17f9a80'
+    this.token_api_nimbo_vital_signs = 'Bearer 0fa7ee780e51f875b7eb0ba56fd4fee37b5bb9817be33d9de263972b22719b85'
 
     let response = await fetch(this.url_api_nimbo_vital_signs, {
       method: 'GET',
@@ -71,7 +71,6 @@ export class MyComponent {
   componentWillLoad() {
     this.consultaApiNimbo()
       .then(data => this.vital_signs_data = data.vital_signs_sets);
-    console.log(this.vital_signs_data)
   }
 
   private getEstatura(): number {
@@ -82,35 +81,43 @@ export class MyComponent {
     return this.peso = valoresConsulta[0].vital_signs_sets[0].elements.weight.value + [' '] + valoresConsulta[0].vital_signs_sets[0].elements.weight.units;
     //return this.peso = this.vital_signs_data[0]['elements']['weight']['value'] + [' '] + this.vital_signs_data[0]['elements']['weight']['units'];
   }
+  private extraerSignoVital(vital_signs_data, vital_sign_name): number {
+    var resultado = 0
+    if(this.vital_signs_data) {
+      resultado = vital_signs_data[0]['elements'][vital_sign_name]['value'] + [' '] + vital_signs_data[0]['elements'][vital_sign_name]['units'];
+    }
+    return resultado;
+  }
+
   private getMasa(): number {
-    return this.masa_corporal = this.vital_signs_data[0]['elements']['body_mass']['value'] + [' '] + this.vital_signs_data[0]['elements']['body_mass']['units'];
+    return this.masa_corporal = this.extraerSignoVital(this.vital_signs_data, 'body_mass');
   }
   private getTemperatura(): number {
-    return this.temperatura = this.vital_signs_data[0]['elements']['temperature']['value'] + [' '] + this.vital_signs_data[0]['elements']['temperature']['units'];
+    return this.temperatura = this.extraerSignoVital(this.vital_signs_data, 'temperature');
   }
   private getFrecuenciaRespiratoria(): number {
-    return this.frecuencia_respiratoria = this.vital_signs_data[0]['elements']['respiratory_rate']['value'] + [' '] + this.vital_signs_data[0]['elements']['respiratory_rate']['units'];
+    return this.frecuencia_respiratoria = this.extraerSignoVital(this.vital_signs_data, 'respiratory_rate');
   }
   private getSistolica(): number {
-    return this.sistolica = this.vital_signs_data[0]['elements']['systole']['value'] + [' '] + this.vital_signs_data[0]['elements']['systole']['units'];
+    return this.sistolica = this.extraerSignoVital(this.vital_signs_data, 'systole');
   }
   private getDiastolica(): number {
-    return this.diastolica = this.vital_signs_data[0]['elements']['diastole']['value'] + [' '] + this.vital_signs_data[0]['elements']['diastole']['units'];
+    return this.diastolica = this.extraerSignoVital(this.vital_signs_data, 'diastole');
   }
   private getFrecuenciaCardiaca(): number {
-    return this.frecuencia_cardiaca = this.vital_signs_data[0]['elements']['heart_rate']['value'] + [' '] + this.vital_signs_data[0]['elements']['heart_rate']['units'];
+    return this.frecuencia_cardiaca = this.extraerSignoVital(this.vital_signs_data, 'heart_rate');
   }
   private getPorcentajeGrasaCorporal(): number {
-    return this.porcentaje_grasa_corporal = this.vital_signs_data[0]['elements']['body_fat']['value'] + [' '] + this.vital_signs_data[0]['elements']['height']['units'];
+    return this.porcentaje_grasa_corporal = this.extraerSignoVital(this.vital_signs_data, 'body_fat');
   }
   private getMasaMuscular(): number {
-    return this.masa_muscular = this.vital_signs_data[0]['elements']['muscle_mass']['value'] + [' '] + this.vital_signs_data[0]['elements']['muscle_mass']['units'];
+    return this.masa_muscular = this.extraerSignoVital(this.vital_signs_data, 'muscle_mass');
   }
   private getPerimetroCefalico(): number {
-    return this.perimetro_cefalico = this.vital_signs_data[0]['elements']['cephalic_perimeter']['value'] + [' '] + this.vital_signs_data[0]['elements']['cephalic_perimeter']['units'];
+    return this.perimetro_cefalico = this.extraerSignoVital(this.vital_signs_data, 'cephalic_perimeter');
   }
   private getSaturacionOxigeno(): number {
-    return this.saturacion_oxigeno = this.vital_signs_data[0]['elements']['oxygen_saturation']['value'] + [' '] + this.vital_signs_data[0]['elements']['oxygen_saturation']['units'];
+    return this.saturacion_oxigeno = this.extraerSignoVital(this.vital_signs_data, 'oxygen_saturation');
   }
 
   private getIcon(tipo) {
