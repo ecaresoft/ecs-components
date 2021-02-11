@@ -7,26 +7,8 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface MyComponent {
-        "consulta_seleccionada": number;
-        "diastolica": number;
-        "estatura": number;
-        "first": string;
-        "frecuencia_cardiaca": number;
-        "frecuencia_respiratoria": number;
-        "imgSrc": string;
-        "last": string;
-        "masa_corporal": number;
-        "masa_muscular": number;
-        "middle": string;
-        "name": string;
-        "perimetro_cefalico": number;
-        "peso": number;
-        "porcentaje_grasa_corporal": number;
-        "saturacion_oxigeno": number;
-        "sistolica": number;
-        "temperatura": number;
         "token_api_nimbo_vital_signs": string;
-        "url_api_nimbo_vital_signs": string;
+        "vital_signs_account_id": number;
         "vital_signs_consultation_id": number;
         "vital_signs_data": string;
         "vital_signs_person_id": number;
@@ -55,26 +37,8 @@ declare global {
 }
 declare namespace LocalJSX {
     interface MyComponent {
-        "consulta_seleccionada"?: number;
-        "diastolica"?: number;
-        "estatura"?: number;
-        "first"?: string;
-        "frecuencia_cardiaca"?: number;
-        "frecuencia_respiratoria"?: number;
-        "imgSrc"?: string;
-        "last"?: string;
-        "masa_corporal"?: number;
-        "masa_muscular"?: number;
-        "middle"?: string;
-        "name"?: string;
-        "perimetro_cefalico"?: number;
-        "peso"?: number;
-        "porcentaje_grasa_corporal"?: number;
-        "saturacion_oxigeno"?: number;
-        "sistolica"?: number;
-        "temperatura"?: number;
         "token_api_nimbo_vital_signs"?: string;
-        "url_api_nimbo_vital_signs"?: string;
+        "vital_signs_account_id"?: number;
         "vital_signs_consultation_id"?: number;
         "vital_signs_data"?: string;
         "vital_signs_person_id"?: number;
