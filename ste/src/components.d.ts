@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface MyComponent {
+        "environment": string;
         "token_api_nimbo_vital_signs": string;
         "vital_signs_account_id": number;
         "vital_signs_consultation_id": number;
@@ -37,6 +38,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface MyComponent {
+        "environment"?: string;
         "token_api_nimbo_vital_signs"?: string;
         "vital_signs_account_id"?: number;
         "vital_signs_consultation_id"?: number;

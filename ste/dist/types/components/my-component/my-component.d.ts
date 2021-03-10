@@ -15,16 +15,17 @@ export declare class MyComponent {
     };
     timer: number;
     request: any;
-    nimbo_api_url: string;
     vital_signs_data: string;
     token_api_nimbo_vital_signs: string;
     vital_signs_person_id: number;
     vital_signs_set_id: number;
     vital_signs_consultation_id: number;
     vital_signs_account_id: number;
+    environment: string;
     consultaVitalSigns(): Promise<any>;
     updateVitalSignSet(): void;
     componentWillLoad(): void;
+    private get_url;
     private extraerSignoVital;
     private getIconURL;
     handleChange(event: any): void;
