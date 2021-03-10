@@ -1,5 +1,5 @@
 import { Component, Prop, h } from '@stencil/core';
-
+import { ENV } from '../config/environment';
 /*
 [ ] Distribución
 [ ] validar rangos de valores
@@ -18,7 +18,6 @@ import { Component, Prop, h } from '@stencil/core';
 })
 
 export class MyComponent {
-
   icons_file_names = {
     'height': "estatura.png",
     'weight': "peso.png",
@@ -35,7 +34,6 @@ export class MyComponent {
   }
   timer =0;
   request:any = {};
-  nimbo_api_url = "https://nimbox-api-staging.herokuapp.com/api/v1";
 
   @Prop() vital_signs_data: string;
 
@@ -46,12 +44,13 @@ export class MyComponent {
   @Prop() vital_signs_set_id: number;
   @Prop() vital_signs_consultation_id: number;
   @Prop() vital_signs_account_id: number;
+  @Prop() environment: string;
 
   async consultaVitalSigns() {
     if(this.vital_signs_person_id)
     {
       let response = await fetch(
-        this.nimbo_api_url + `/people/${this.vital_signs_person_id}/vital_signs_sets`,
+        this.get_url(this.environment) + `/people/${this.vital_signs_person_id}/vital_signs_sets`,
         {
           method: 'GET',
           headers: {
@@ -70,7 +69,7 @@ export class MyComponent {
     myHeaders.append("Authorization", "Bearer "+this.token_api_nimbo_vital_signs);
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify(this.request);
-    fetch(`https://nimbox-api-staging.herokuapp.com/api/v1/vital_signs_sets/${this.vital_signs_set_id}`, {
+    fetch(this.get_url(this.environment)+this.vital_signs_set_id, {
       method: 'PUT',
       headers: myHeaders,
       body: raw,
@@ -86,14 +85,39 @@ export class MyComponent {
       .then(data => this.vital_signs_data = data.vital_signs_sets);
   }
 
+  private get_url(_env) {
+    let environment = ENV[`${_env}`];
+
+    if (environment === null || environment === undefined) {
+      return ENV.staging.apiBaseURL+ENV.apiBasePath
+    }
+    
+    return environment.apiBaseURL+ENV.apiBasePath;
+  }
+
   private extraerSignoVital(vital_signs_data, vital_sign_name): any {
     var resultado = { value: "-", unit: "-" }
-    if(this.vital_signs_data) {
-      resultado = { 
-        value: vital_signs_data[0]['elements'][vital_sign_name]['value'],
-        unit: vital_signs_data[0]['elements'][vital_sign_name]['units']
+    if(vital_signs_data) {
+      let last_vital_signs = vital_signs_data[this.vital_signs_data.length - 1];
+      let value = '-';
+      let unit = '-';
+
+      if (last_vital_signs) {
+        if (last_vital_signs['elements'][vital_sign_name] !== undefined) {
+          value = last_vital_signs['elements'][vital_sign_name]['value'];
+        }
+  
+        if (last_vital_signs['elements'][vital_sign_name] !== undefined) {
+          unit = last_vital_signs['elements'][vital_sign_name]['units'];
+        }
+
+        resultado = { 
+          value,
+          unit
+        }
       }
     }
+    
     return resultado;
   }
 

@@ -1,5 +1,18 @@
 import { r as registerInstance, h } from './index-58c212db.js';
 
+const ENV = {
+    apiBasePath: 'api/v1',
+    production: {
+        apiBaseURL: 'https://nimbox-api-production.herokuapp.com/'
+    },
+    staging: {
+        apiBaseURL: 'https://nimbox-api-staging.herokuapp.com/'
+    },
+    development: {
+        apiBaseURL: 'http://localhost:5000/'
+    }
+};
+
 const myComponentCss = ":host{font-family:Arial, Helvetica, sans-serif}input{color:rgb(67, 98, 143);font-size:1.1em;padding:8px;width:50%;text-align:center;border-color:rgb(240, 240, 240)}div{display:flex;justify-content:center}td{margin:2px;border-bottom:1.2px solid rgb(233, 233, 233)}.vitalSignsTextos{color:rgb(87, 87, 87);font-size:1em;padding:12px}";
 
 const MyComponent = class {
@@ -21,11 +34,10 @@ const MyComponent = class {
         };
         this.timer = 0;
         this.request = {};
-        this.nimbo_api_url = "https://nimbox-api-staging.herokuapp.com/api/v1";
     }
     async consultaVitalSigns() {
         if (this.vital_signs_person_id) {
-            let response = await fetch(this.nimbo_api_url + `/people/${this.vital_signs_person_id}/vital_signs_sets`, {
+            let response = await fetch(this.get_url(this.environment) + `/people/${this.vital_signs_person_id}/vital_signs_sets`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,7 +54,7 @@ const MyComponent = class {
         myHeaders.append("Authorization", "Bearer " + this.token_api_nimbo_vital_signs);
         myHeaders.append("Content-Type", "application/json");
         var raw = JSON.stringify(this.request);
-        fetch(`https://nimbox-api-staging.herokuapp.com/api/v1/vital_signs_sets/${this.vital_signs_set_id}`, {
+        fetch(this.get_url(this.environment) + this.vital_signs_set_id, {
             method: 'PUT',
             headers: myHeaders,
             body: raw,
@@ -56,13 +68,31 @@ const MyComponent = class {
         this.consultaVitalSigns()
             .then(data => this.vital_signs_data = data.vital_signs_sets);
     }
+    get_url(_env) {
+        let environment = ENV[`${_env}`];
+        if (environment === null || environment === undefined) {
+            return ENV.staging.apiBaseURL + ENV.apiBasePath;
+        }
+        return environment.apiBaseURL + ENV.apiBasePath;
+    }
     extraerSignoVital(vital_signs_data, vital_sign_name) {
         var resultado = { value: "-", unit: "-" };
-        if (this.vital_signs_data) {
-            resultado = {
-                value: vital_signs_data[0]['elements'][vital_sign_name]['value'],
-                unit: vital_signs_data[0]['elements'][vital_sign_name]['units']
-            };
+        if (vital_signs_data) {
+            let last_vital_signs = vital_signs_data[this.vital_signs_data.length - 1];
+            let value = '-';
+            let unit = '-';
+            if (last_vital_signs) {
+                if (last_vital_signs['elements'][vital_sign_name] !== undefined) {
+                    value = last_vital_signs['elements'][vital_sign_name]['value'];
+                }
+                if (last_vital_signs['elements'][vital_sign_name] !== undefined) {
+                    unit = last_vital_signs['elements'][vital_sign_name]['units'];
+                }
+                resultado = {
+                    value,
+                    unit
+                };
+            }
         }
         return resultado;
     }
