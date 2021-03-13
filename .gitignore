@@ -7,6 +7,10 @@
 # dependencies
 /bower_components/
 /node_modules/
+/stencil/node_modules/
+/stencil/dist/
+/stencil/loader
+/stencil/www/build
 
 # misc
 /.env*
