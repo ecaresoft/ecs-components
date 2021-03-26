@@ -1,0 +1,101 @@
+{
+  "parserOptions": {
+    "project": "./stencil/vaccination-module/tsconfig.json"
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@stencil/recommended"
+  ],
+  "rules": {
+    "@stencil/async-methods": "error",
+    "@stencil/ban-prefix": ["error", ["stencil", "stnl", "st"]],
+    "@stencil/decorators-context": "error",
+    "@stencil/decorators-style": [
+      "error", {
+        "prop": "inline",
+        "state": "inline",
+        "element": "inline",
+        "event": "inline",
+        "method": "multiline",
+        "watch": "multiline",
+        "listen": "multiline"
+      }],
+    "@stencil/element-type": "error",
+    "@stencil/host-data-deprecated": "error",
+    "@stencil/methods-must-be-public": "error",
+    "@stencil/no-unused-watch": "error",
+    "@stencil/own-methods-must-be-private": "error",
+    "@stencil/own-props-must-be-private": "error",
+    "@stencil/prefer-vdom-listener": "off",
+    "@stencil/props-must-be-public": "error",
+    "@stencil/props-must-be-readonly": "error",
+    "@stencil/render-returns-host": "error",
+    "@stencil/required-jsdoc": "off",
+    "@stencil/reserved-member-names": "error",
+    "@stencil/single-export": "error",
+    "@stencil/strict-mutable": "error",
+    "react/jsx-no-bind": "off",
+
+    "no-alert": 1,
+    "no-console": 1,
+    "no-debugger": 1,
+    "no-useless-escape": 1,
+    "no-with": 2,
+    "vars-on-top": 1,
+    "wrap-iife": 1,
+    "radix": 2,
+    "eqeqeq": 2,
+    "accessor-pairs": 1,
+    "array-bracket-spacing": 1,
+    "array-callback-return": 2,
+    "block-scoped-var": 2,
+    "curly": 1,
+    "default-case": 2,
+    "dot-notation": 2,
+    "brace-style": 1,
+    "comma-dangle": 1,
+    "computed-property-spacing": 1,
+    "indent": [1, 2, { "SwitchCase": 1 }],
+    "block-spacing": 1,
+    "new-cap": 0,
+    "dot-location": ["error", "property"],
+    "comma-style": ["error", "last"],
+
+    // "camelcase": [
+    //   "error", {
+    //     "properties": "never"
+    //   }
+    // ],
+
+    "one-var": [
+      "error",
+      "never"
+    ],
+
+    "max-len": [
+      "error", {
+        "code": 90,
+        "ignoreTemplateLiterals": true,
+        "ignoreUrls": true
+      }
+    ],
+
+    "operator-linebreak": [
+      "error",
+
+      "after", {
+        "overrides": {
+          "+": "before"
+        }
+      }
+    ],
+
+    "object-shorthand": [
+      "error",
+
+      "always", {
+        "avoidQuotes": true
+      }
+    ]
+  }
+}
