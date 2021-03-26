@@ -1,0 +1,16 @@
+{
+  "vaccine": "vaccine",
+  "title": "vaccines",
+  "vaccine_name"  : "Vaccine name",
+  "lot": "Lot",
+  "application_date": "Application date",
+  "notes": "Notes",
+  "next_dose": "Next dose",
+  "placeholder_lot": "Lot number",
+  "placeholder_notes": "Start writing...",
+  "save": "Save",
+  "cancel": "Cancel",
+  "delete_vaccine": "Delete vaccine",
+  "dialog_delete_vaccine": "The vaccine will be remove. Do you wish to continue?",
+  "delete": "Delete"
+}
