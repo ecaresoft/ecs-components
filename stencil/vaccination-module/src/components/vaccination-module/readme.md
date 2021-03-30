@@ -7,12 +7,13 @@
 
 ## Properties
 
-| Property          | Attribute         | Description | Type     | Default     |
-| ----------------- | ----------------- | ----------- | -------- | ----------- |
-| `environment`     | `environment`     |             | `string` | `undefined` |
-| `language`        | `language`        |             | `string` | `undefined` |
-| `person_id`       | `person_id`       |             | `number` | `undefined` |
-| `token_api_nimbo` | `token_api_nimbo` |             | `string` | `undefined` |
+| Property          | Attribute         | Description | Type      | Default     |
+| ----------------- | ----------------- | ----------- | --------- | ----------- |
+| `environment`     | `environment`     |             | `string`  | `undefined` |
+| `language`        | `language`        |             | `string`  | `undefined` |
+| `person_id`       | `person_id`       |             | `number`  | `undefined` |
+| `show_print`      | `show_print`      |             | `boolean` | `false`     |
+| `token_api_nimbo` | `token_api_nimbo` |             | `string`  | `undefined` |
 
 
 ## Dependencies

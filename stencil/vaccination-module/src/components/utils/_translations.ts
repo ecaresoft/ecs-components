@@ -15,7 +15,8 @@ const es = {
     "delete": "Eliminar",
     'pacient': 'Paciente',
     'born_at': 'Fecha de nacimiento',
-    'vaccination_card': 'Cartilla de vacunación'
+    'vaccination_card': 'Cartilla de vacunación',
+    'place_holder_search': 'Buscar vacuna...'
 };
 
 const en = {
@@ -35,7 +36,8 @@ const en = {
     "delete": "Delete",
     'pacient': 'Pacient',
     'born_at': 'Born at',
-    'vaccination_card': 'Vaccination card'
+    'vaccination_card': 'Vaccination card',
+    'place_holder_search': 'Search vaccine...'
 };
 
 const ar = {
@@ -52,7 +54,8 @@ const ar = {
     "cancel": "Cancel",
     "delete_vaccine": "Delete vaccine",
     "dialog_delete_vaccine": "The vaccine will be remove. Do you wish to continue?",
-    "delete": "Delete"
+    "delete": "Delete",
+    'place_holder_search': 'Buscar vacuna ...'
 };
 
 export { es, en ,ar }

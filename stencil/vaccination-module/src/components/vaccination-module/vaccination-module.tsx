@@ -16,6 +16,7 @@ export class VaccinationModule {
   @Prop() readonly environment: string;
   @Prop() readonly person_id: number;
   @Prop() readonly language: string;
+  @Prop() readonly show_print: boolean = false;
   @State() vaccines: VaccineApplication[] = [];
   @State() picker: any;
   @State() translations: any;
@@ -79,9 +80,10 @@ export class VaccinationModule {
   }
 
   @Listen('itemSelectedAddManually')
-  itemSelectedManually(){
+  itemSelectedManually(ev: any) {
+    let vaccineName = (ev.detail !== '') ? ev.detail : "";
     let _vaccine = new VaccineApplication({
-      'vaccine_name': '',
+      'vaccine_name': vaccineName,
       'vaccine_id': '',
       'lote': '',
       'application_date': todayStringDate(),
@@ -148,10 +150,12 @@ export class VaccinationModule {
       <div class="vaccination-module">
         <div class="vaccination-module-head">
           <div class="title"> { this.translations.title } </div>
-          <div class="print-btn-container">
-            <button class="icon-print" onClick={ () => this.printVaccinationCard() } 
-              aria-label="pritn vacine card"/>
-          </div>
+          { this.show_print &&
+            <div class="print-btn-container">
+              <button class="icon-print" onClick={ () => this.printVaccinationCard() } 
+                aria-label="pritn vacine card"/>
+            </div>
+          }
         </div>
         
         <auto-complete
@@ -159,7 +163,7 @@ export class VaccinationModule {
           token_api_nimbo={this.token_api_nimbo}
           language={ this.language }
           environment={this.environment}
-          placeholder={ this.translations.vaccine }
+          placeholder={ this.translations.place_holder_search }
         ></auto-complete>
 
         <vaccine-table

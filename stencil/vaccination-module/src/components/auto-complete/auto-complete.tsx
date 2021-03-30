@@ -14,8 +14,17 @@ export class AutoComplete {
     this.dataService = new DataService(
       this.environment, 
       this.token_api_nimbo);
+    
+    let _locale: any;
 
-    switch(this.language){
+    if(this.language.includes('-')) {
+      _locale = this.language.split('-');
+      _locale = _locale[0];
+    }else {
+      _locale = this.language;
+    }
+
+    switch(_locale){
       case 'es':
         this.addVaccinesCaption = '+ Agregar vacuna manualmente';
         break;
@@ -127,6 +136,7 @@ export class AutoComplete {
   };
 
   private onKeyPress = (e) => {
+    let _locale;
 
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -135,7 +145,14 @@ export class AutoComplete {
       }
     }
 
-    this.dataService.getVaccines(this.inputValue, this.language)
+    if(this.language.includes('-')) {
+      _locale = this.language.split('-');
+      _locale = _locale[0];
+    }else {
+      _locale = this.language;
+    }
+
+    this.dataService.getVaccines(this.inputValue, _locale)
       .then(data => {
         this.suggestionObj = data.vaccines;
       });
@@ -145,15 +162,14 @@ export class AutoComplete {
   }
 
   private onSelect = (selection: string) => {
-    this.inputValue = "";
     this.selectedSuggestionIndex = undefined;
     this.showSuggestions = false;
     if(selection === this.addVaccinesCaption){
-      this.itemSelectedAddManually.emit();
+      this.itemSelectedAddManually.emit(this.inputValue);
     }else{
       this.emitSelect(selection);
     }
-    
+    this.inputValue = "";
   }
 
   private emitSelect(selection: string){
