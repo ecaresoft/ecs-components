@@ -1,8 +1,20 @@
 
-.vaccine-table-card,th ,td {
+.vaccine-table-card {
   border: 1px solid black;
   border-collapse: collapse;
   width: 100%;
+
+  &th{
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  &td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+  }
 }
 
 #vaccineCardFormat {

@@ -99,6 +99,7 @@ export namespace Components {
         "environment": string;
         "language": string;
         "person_id": number;
+        "show_print": boolean;
         "token_api_nimbo": string;
     }
     interface VaccineTable {
@@ -254,6 +255,7 @@ declare namespace LocalJSX {
         "environment"?: string;
         "language"?: string;
         "person_id"?: number;
+        "show_print"?: boolean;
         "token_api_nimbo"?: string;
     }
     interface VaccineTable {
