@@ -1,28 +1,29 @@
 {
-  "name": "vital-signs-ecs",
-  "version": "0.0.2",
-  "description": "Stencil Component Starter",
-  "main": "dist/index.cjs.js",
-  "module": "dist/custom-elements/index.js",
-  "es2015": "dist/esm/index.mjs",
-  "es2017": "dist/esm/index.mjs",
-  "types": "dist/custom-elements/index.d.ts",
-  "collection": "dist/collection/collection-manifest.json",
-  "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/ste/ste.esm.js",
-  "files": [
-    "dist/",
-    "loader/"
-  ],
-  "scripts": {
-    "build": "stencil build --docs",
-    "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
-  },
-  "dependencies": {
-    "@stencil/core": "^1.3.3"
-  },
-  "license": "MIT"
+    "name": "vital-signs-ecs",
+    "version": "0.0.4",
+    "description": "Stencil Component Starter",
+    "main": "dist/index.cjs.js",
+    "module": "dist/custom-elements/index.js",
+    "es2015": "dist/esm/index.mjs",
+    "es2017": "dist/esm/index.mjs",
+    "types": "dist/custom-elements/index.d.ts",
+    "collection": "dist/collection/collection-manifest.json",
+    "collection:main": "dist/collection/index.js",
+    "unpkg": "dist/ste/ste.esm.js",
+    "files": [
+        "dist/",
+        "loader/"
+    ],
+    "scripts": {
+        "build": "stencil build --docs",
+        "start": "stencil build --dev --watch --serve",
+        "test": "stencil test --spec --e2e",
+        "test.watch": "stencil test --spec --e2e --watchAll",
+        "generate": "stencil generate"
+    },
+    "dependencies": {
+        "@stencil/core": "^1.3.3",
+        "chart.js": "^3.2.1"
+    },
+    "license": "MIT"
 }

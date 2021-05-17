@@ -1,0 +1,49 @@
+{
+  "name": "chart.js-stencil",
+  "version": "0.0.2",
+  "description": "Chart.js custom element",
+  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
+  "types": "dist/types/components.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "stencil build",
+    "start": "stencil build --dev --watch --serve",
+    "test": "jest",
+    "test.watch": "jest --watch"
+  },
+  "dependencies": {
+    "chart.js": "^2.9.4"
+  },
+  "devDependencies": {
+    "@stencil/core": "^0.12.3",
+    "@types/jest": "^23.3.1",
+    "jest": "^23.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitflower/chart.js-stencil.git"
+  },
+  "author": "Matthias Max",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bitflower/chart.js-stencil"
+  },
+  "homepage": "https://github.com/bitflower/chart.js-stencil",
+  "jest": {
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json",
+      "jsx"
+    ]
+  }
+}

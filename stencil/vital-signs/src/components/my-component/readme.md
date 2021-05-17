@@ -18,6 +18,19 @@
 | `vital_signs_set_id`          | `vital_signs_set_id`          |             | `number` | `undefined` |
 
 
+## Dependencies
+
+### Depends on
+
+- [stencil-asset](../stencil-asset)
+
+### Graph
+```mermaid
+graph TD;
+  my-component --> stencil-asset
+  style my-component fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

@@ -1,28 +1,38 @@
-:host {  
-  font-family:Arial, Helvetica, sans-serif;
+:host {
+    font-family: "Proxima Nova", Helvetica, Arial, sans-serif;
 }
 
-input{
-  color: rgb(67, 98, 143);
-  font-size: 1.1em;
-  padding: 8px;
-  width: 50%;
-  text-align: center;
-  border-color: rgb(240, 240, 240);
+input {
+    color: #59636d;
+    font-size: 14px;
+    padding: 6px;
+    width: 40%;
+    text-align: center;
 }
 
-div {  
-  display: flex;
-  justify-content: center;
+div {
+    display: flex;
+    justify-content: center;
 }
 
-td{
-  margin: 2px;
-  border-bottom: 1.2px solid rgb(233, 233, 233);
+td {
+    margin: 2px;
+    border-bottom: 1px solid #f9fbfc;
 }
 
-.vitalSignsTextos{
-  color: rgb(87, 87, 87);
-  font-size: 1em;
-  padding: 12px;
+.vitalSignsTextos {
+    color: #59636d;
+    font-size: 14px;
+    padding: 16px;
+}
+
+.vitalSignsUnidades {
+    min-width: 50px;
+    color: #7f95bb;
+}
+
+.vitalSignsValores {
+    color: #59636d;
+    margin-left: 12px;
+    margin-right: 6px;
 }

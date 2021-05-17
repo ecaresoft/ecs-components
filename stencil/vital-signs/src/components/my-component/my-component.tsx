@@ -1,5 +1,8 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Element, Prop, h } from '@stencil/core';
 import { ENV } from '../config/environment';
+import { Chart as chartjs, registerables } from 'chart.js';
+chartjs.register(...registerables);
+
 /*
 [ ] Distribución
 [ ] validar rangos de valores
@@ -18,29 +21,15 @@ import { ENV } from '../config/environment';
 })
 
 export class MyComponent {
-  icons_file_names = {
-    'height': "estatura.png",
-    'weight': "peso.png",
-    'temperature': "temperatura.png",
-    'respiratory_rate': "frecuencia_respiratoria.png",
-    'systole': "sistolica.png",
-    'diastole': "diastolica.png",
-    'heart_rate': "frecuencia_cardiaca.png",
-    'body_mass': "masa_corporal.png",
-    'body_fat_percentage': "porcentaje_grasa_corporal.png",
-    'lean_body_mass': "masa_muscular.png",
-    'head_circumference': "perimetro_cefalico.png",
-    'oxygen_saturation': "saturacion_oxigeno.png"
-  }
-  timer =0;
+  timer = 0;
   request:any = {};
 
   @Prop() vital_signs_data: string;
+  @Element() private element: HTMLElement;
 
   // Parametros
   @Prop() token_api_nimbo_vital_signs: string;
   @Prop() vital_signs_person_id: number;
-
   @Prop() vital_signs_set_id: number;
   @Prop() vital_signs_consultation_id: number;
   @Prop() vital_signs_account_id: number;
@@ -90,8 +79,7 @@ export class MyComponent {
 
     if (environment === null || environment === undefined) {
       return ENV.staging.apiBaseURL+ENV.apiBasePath
-    }
-    
+    }    
     return environment.apiBaseURL+ENV.apiBasePath;
   }
 
@@ -116,15 +104,14 @@ export class MyComponent {
           unit
         }
       }
-    }
-    
+    }    
     return resultado;
   }
 
-  private getIconURL(tipo) {
+  /* private getIconURL(tipo) {
     let ruta_iconos = this.icons_file_names[tipo];
     return <img src={`../assets/${ruta_iconos}`}></img>
-  }
+  } */
 
   // https://stackoverflow.com/questions/1909441/how-to-delay-the-keyup-handler-until-the-user-stops-typing
   handleChange(event) {
@@ -141,34 +128,193 @@ export class MyComponent {
           <table class="vitalSignsTabla">
             {this.renderRow("Estatura", "height")}
             {this.renderRow("Peso", "weight")}
+            {this.renderRow("Masa Corporal", "body_mass")}
             {this.renderRow("Temperatura", "temperature")}
             {this.renderRow("Frecuencia Respiratoria", "respiratory_rate")}
             {this.renderRow("Sistólica", "systole")}
             {this.renderRow("Diastólica", "diastole")}
-            {this.renderRow("Frecuencia Cardiaca", "heart_rate")}
-            {this.renderRow("Masa Corporal", "body_mass")}
-            {this.renderRow("Porcentaje Grasa Corporal", "body_fat_percentage")}
-            {this.renderRow("Masa Muscula", "lean_body_mass")}
+            {this.renderRow("Frecuencia Cardiaca", "heart_rate")}            
+            {this.renderRow("Porcentaje de Grasa Corporal", "body_fat_percentage")}
+            {this.renderRow("Masa Muscular", "lean_body_mass")}
             {this.renderRow("Perímetro Cefálico", "head_circumference")}
             {this.renderRow("Saturación de Oxígeno", "oxygen_saturation")}
           </table>
-        </div>
-      </div>)
+        </div>        
+      </div>
+      )      
   }
+
+// Códigos de color para cada Vital Sign:
+// Estatura"                      rgb(149, 125, 186)
+// Peso"                          rgb(94, 169, 241)
+// Masa Corporal"                 rgb(191, 219, 109)
+// Temperatura"                   rgb(79, 209, 136)
+// Frecuencia Respiratoria"       rgb(131, 206, 228)
+// Sistólica"                     rgb(255, 64, 92)
+// Diastólica"                    rgb(195, 0, 71)
+// Frecuencia Cardiaca"           rgb(215, 82, 154)           
+// Porcentaje de Grasa Corporal"  rgb(245, 130, 57)
+// Masa Muscular"                 rgb(244, 146, 158)
+// Perímetro Cefálico"            rgb(9, 111, 168)
+// Saturación de Oxígeno"         rgb(110, 179, 237)
+
+  componentDidLoad() {
+    let labelsDate: string[] = [];
+
+    let labelsValuesAbdomen : number[] = [];
+    let labelsValuesAggresiveness: number[] = [];
+    let labelsValuesAnxiety : number[] = [];
+    let labelsValuesBodyFatPercentage : number[] = [];
+    let labelsValuesBodyMass : number[] = [];
+    let labelsValuesConcentration : number[] = [];
+    let labelsValuesConstipation : number[] = [];
+    let labelsValuesCramps : number[] = [];
+    let labelsValuesDepression : number[] = [];
+    let labelsValuesDiarrhea : number[] = [];
+    let labelsValuesDiastole : number[] = [];
+    let labelsValuesDizziness : number[] = [];
+    let labelsValuesFat : number[] = [];
+    let labelsValuesFatigue : number[] = [];
+    let labelsValuesHalitosis : number[] = [];
+    let labelsValuesHeadCircumference : number[] = [];
+    let labelsValuesHeadache : number[] = [];
+    let labelsValuesHeartRate : number[] = [];
+    let labelsValuesHeight : number[] = [];
+    let labelsValuesHunger : number[] = [];
+    let labelsValuesImpatience : number[] = [];
+    let labelsValuesImpulseControl : number[] = [];
+    let labelsValuesIrritability : number[] = [];
+    let labelsValuesLeanBodyMass : number[] = [];
+    let labelsValuesLostWeight : number[] = [];
+    let labelsValuesOxygenSaturation : number[] = [];
+    let labelsValuesRespiratoryRate : number[] = [];
+    let labelsValuesSatiety : number[] = [];
+    let labelsValuesSleepingProblems : number[] = [];
+    let labelsValuesStimulantsNeed : number[] = [];
+    let labelsValuesSystole : number[] = [];
+    let labelsValuesTemperature : number[] = [];
+    let labelsValuesTolerance : number[] = [];
+    let labelsValuesWeight: number[] = [];
+    console.log("Labels Values Aggresiveness: " + labelsValuesAggresiveness);
+
+    let canvas = this.element.shadowRoot.querySelector('canvas');
+    //let canvas2 = this.element.shadowRoot.querySelector('#myChart1');
+    //console.log("canvas 2: " + canvas2);
+    
+    console.log("*************************");
+    console.log(this.vital_signs_data);    
+    console.log(this.element.shadowRoot.querySelector('canvas')); 
+
+    for(let i=0; i<this.vital_signs_data.length; i++) {      
+      let fecha = String(([this.vital_signs_data[i]['created_at']]));
+      let fechaA = fecha.split('T');      
+      labelsDate.push(fechaA[0]);
+      console.log(' fechaA: ' , fechaA);
+     
+      labelsValuesAbdomen.push(this.vital_signs_data[i]['elements']['abdomen']['value']|| 0 );
+      labelsValuesAggresiveness.push(this.vital_signs_data[i]['elements']['aggressiveness']['value'] || 0 );
+      labelsValuesAnxiety.push(this.vital_signs_data[i]['elements']['anxiety']['value']|| 0 );
+      labelsValuesBodyFatPercentage.push(this.vital_signs_data[i]['elements']['body_fat_percentage']['value']|| 0 );
+      labelsValuesBodyMass.push(this.vital_signs_data[i]['elements']['body_mass']['value']|| 0 );
+      labelsValuesConcentration.push(this.vital_signs_data[i]['elements']['concentration']['value']|| 0 );
+      labelsValuesConstipation.push(this.vital_signs_data[i]['elements']['constipation']['value']|| 0 );
+      labelsValuesCramps.push(this.vital_signs_data[i]['elements']['cramps']['value']|| 0 );
+      labelsValuesDepression.push(this.vital_signs_data[i]['elements']['depression']['value']|| 0 );
+      labelsValuesDiarrhea.push(this.vital_signs_data[i]['elements']['diarrhea']['value']|| 0 );
+      labelsValuesDiastole.push(this.vital_signs_data[i]['elements']['diastole']['value']|| 0 );
+      labelsValuesDizziness.push(this.vital_signs_data[i]['elements']['dizziness']['value']|| 0 );
+      labelsValuesFat.push(this.vital_signs_data[i]['elements']['fat']['value']|| 0 );
+      labelsValuesFatigue.push(this.vital_signs_data[i]['elements']['fatigue']['value']|| 0 );
+      labelsValuesHalitosis.push(this.vital_signs_data[i]['elements']['halitosis']['value']|| 0 );
+      labelsValuesHeadCircumference.push(this.vital_signs_data[i]['elements']['head_circumference']['value']|| 0 );
+      labelsValuesHeadache.push(this.vital_signs_data[i]['elements']['headache']['value']|| 0 );
+      labelsValuesHeartRate.push(this.vital_signs_data[i]['elements']['heart_rate']['value']|| 0 );
+      labelsValuesHeight.push(this.vital_signs_data[i]['elements']['height']['value']|| 0 );
+      labelsValuesHunger.push(this.vital_signs_data[i]['elements']['hunger']['value']|| 0 );
+      labelsValuesImpatience.push(this.vital_signs_data[i]['elements']['impatience']['value']|| 0 );
+      labelsValuesImpulseControl.push(this.vital_signs_data[i]['elements']['impulse_control']['value']|| 0 );
+      labelsValuesIrritability.push(this.vital_signs_data[i]['elements']['irritability']['value']|| 0 );
+      labelsValuesLeanBodyMass.push(this.vital_signs_data[i]['elements']['lean_body_mass']['value']|| 0 );
+      labelsValuesLostWeight.push(this.vital_signs_data[i]['elements']['lost_weight']['value']|| 0 );
+      labelsValuesOxygenSaturation.push(this.vital_signs_data[i]['elements']['oxygen_saturation']['value']|| 0 );
+      labelsValuesRespiratoryRate.push(this.vital_signs_data[i]['elements']['respiratory_rate']['value']|| 0 );
+      labelsValuesSatiety.push(this.vital_signs_data[i]['elements']['satiety']['value']|| 0 );
+      labelsValuesSleepingProblems.push(this.vital_signs_data[i]['elements']['sleeping_problems']['value']|| 0 );
+      labelsValuesStimulantsNeed.push(this.vital_signs_data[i]['elements']['stimulants_need']['value']|| 0 );
+      labelsValuesSystole.push(this.vital_signs_data[i]['elements']['systole']['value']|| 0 );
+      labelsValuesTemperature.push(this.vital_signs_data[i]['elements']['temperature']['value']|| 0 );
+      labelsValuesTolerance.push(this.vital_signs_data[i]['elements']['tolerance']['value']|| 0 );
+      labelsValuesWeight.push(this.vital_signs_data[i]['elements']['weight']['value']|| 0 );
+    }  
+
+    console.log("Las fechas de consultas para labels son: ");
+    console.log(labelsDate);
+    //console.log("Los valores para llenar la tabla de estatura son: ");
+    //console.log(labelsValuesHeight);
+
+    //let data = dataHeight;
+    //switch (data){
+    //  case 'dataHeight':
+    //    labels: labelsDate
+    //    datasets: [
+    //        {
+    //          label: 'Height',
+    //          data: labelsValuesHeight,
+    //          borderColor: 'rgb(55, 199, 132)',          
+    //        }
+    //      ];        
+    //  break;
+    //}  
+
+    const data = {
+      labels: labelsDate,
+      datasets: [
+        {
+          label: 'Weight',
+          data: labelsValuesWeight,
+          borderColor: 'rgb(155, 99, 132)',          
+        }
+      ]
+    };
+
+    var myChart = new chartjs(canvas, {
+      type: 'line',
+      data: data,      
+      options: {}
+    })
+    //var myChart1 = new chartjs(canvas2, {
+    //  type: 'line',
+    //  data: data,      
+    //  options: {}
+    //})
+
+  }
+
+  // Pendientes:
+  // 1.- Crear un diccionario o estructura donde almacenar todos los rgb de acuerdo al Vital sign
+  // 2.- Dibujar todas las charts debajo de cada vital sign
+  // 3.- Poner ids a cada chart acorde al element_name
+
 
   renderRow(label, element_name) {
     var signo_vital = this.extraerSignoVital(this.vital_signs_data, element_name)
     return (
       <tr>
-      <td> {this.getIconURL(element_name)} </td>
+      <td> <stencil-asset icon={element_name}></stencil-asset></td>
       <td class="vitalSignsTextos">{label}</td>
       <td class="vitalSignsValores">
         {
           this.vital_signs_account_id
           ? <input name={element_name}  type="number" value={signo_vital.value} 
           onInput={(e) => this.handleChange(e)} />
-          : <span>{signo_vital.value}</span>
-        } <span>{signo_vital.unit}</span>
+          : <span class="vitalSignsValores">{signo_vital.value}</span>
+        } <span class="vitalSignsUnidades">{signo_vital.unit}</span>
+      </td>
+      <td>
+        <canvas id="myChart" width="300" height="200"></canvas>
+      </td>
+      <td>
+        <canvas id="myChart1" width="300" height="200"></canvas>
       </td>
     </tr>
     )
