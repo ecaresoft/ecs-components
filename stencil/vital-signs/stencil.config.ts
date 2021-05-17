@@ -15,6 +15,10 @@ export const config: Config = {
     },
     {
       type: 'www',
+      dir: 'public',
+      copy: [
+        { src: 'components/stencil-asset/assets', dest: 'assets' }
+      ],
       serviceWorker: null, // disable service workers
     },
   ],

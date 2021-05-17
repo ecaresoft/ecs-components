@@ -1,28 +1,61 @@
-:host {  
-  font-family:Arial, Helvetica, sans-serif;
+:host {
+    font-family: "Proxima Nova", Helvetica, Arial, sans-serif;
 }
 
-input{
-  color: rgb(67, 98, 143);
-  font-size: 1.1em;
-  padding: 8px;
-  width: 50%;
-  text-align: center;
-  border-color: rgb(240, 240, 240);
+input {
+    color: #59636d;
+    font-size: 14px;
+    padding: 2px;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid lightgrey;
+    border-spacing: 5px;
 }
 
-div {  
-  display: flex;
-  justify-content: center;
+div {
+    display: inline;
 }
 
-td{
-  margin: 2px;
-  border-bottom: 1.2px solid rgb(233, 233, 233);
+.vitalSignRow {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-top: 1px solid #f9fbfc;
+    display: flex;
+    align-items: center;
 }
 
-.vitalSignsTextos{
-  color: rgb(87, 87, 87);
-  font-size: 1em;
-  padding: 12px;
+.vitalSignsTextos {
+    color: #5a646c;
+    font-size: 12px;
+    /* max-width: 70px;
+    text-align: left; */
+}
+
+.vitalSignsUnidades {
+    min-width: 50px;
+    color: #7f95bb;
+}
+
+.vitalSignsValores {
+    color: #59636d;
+}
+
+td {
+    margin: 2px;
+    border-bottom: 1px solid #f9fbfc;
+}
+
+.collapsible {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 12px;
+}
+
+.active,
+.collapsible:hover {
+    background-color: #ccc;
 }

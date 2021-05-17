@@ -1,0 +1,23 @@
+collapsible-chart {
+    border: black dashed 1px;
+}
+
+#header {
+    color: #59636d;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+#content {
+    width: 310px;
+    height: 200px;
+}
+
+.contenedorChart {
+    width: 310px;
+    margin: 20px;
+}
+
+.contenedorChartAbierto {
+    height: 200px;
+}
