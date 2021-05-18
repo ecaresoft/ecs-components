@@ -1,4 +1,4 @@
-import { Component, Element, Prop, h } from '@stencil/core';
+import { Component, Element, Prop, h, State } from '@stencil/core';
 import { ENV } from '../config/environment';
 import { Chart as chartjs, registerables } from 'chart.js';
 chartjs.register(...registerables);
@@ -25,7 +25,7 @@ export class MyComponent {
   request:any = {};
 
   @Prop() vital_signs_data: string;
-  @Element() private element: HTMLElement;
+  @Element() element: HTMLElement;
 
   // Parametros
   @Prop() token_api_nimbo_vital_signs: string;
@@ -34,6 +34,11 @@ export class MyComponent {
   @Prop() vital_signs_consultation_id: number;
   @Prop() vital_signs_account_id: number;
   @Prop() environment: string;
+
+  @State() labelsValuesWeight:number[] = [];
+  @State() labelsDate:string[] = [];
+
+  myChart: any;
 
   async consultaVitalSigns() {
     if(this.vital_signs_person_id)
@@ -71,7 +76,7 @@ export class MyComponent {
 
   componentWillLoad() {
     this.consultaVitalSigns()
-      .then(data => this.vital_signs_data = data.vital_signs_sets);
+      .then(data => { this.vital_signs_data = data.vital_signs_sets; this.actualizarDataDeGraficas() });
   }
 
   private get_url(_env) {
@@ -159,96 +164,92 @@ export class MyComponent {
 // Saturación de Oxígeno"         rgb(110, 179, 237)
 
   componentDidLoad() {
-    let labelsDate: string[] = [];
+    // let labelsDate: string[] = [];
 
-    let labelsValuesAbdomen : number[] = [];
-    let labelsValuesAggresiveness: number[] = [];
-    let labelsValuesAnxiety : number[] = [];
-    let labelsValuesBodyFatPercentage : number[] = [];
-    let labelsValuesBodyMass : number[] = [];
-    let labelsValuesConcentration : number[] = [];
-    let labelsValuesConstipation : number[] = [];
-    let labelsValuesCramps : number[] = [];
-    let labelsValuesDepression : number[] = [];
-    let labelsValuesDiarrhea : number[] = [];
-    let labelsValuesDiastole : number[] = [];
-    let labelsValuesDizziness : number[] = [];
-    let labelsValuesFat : number[] = [];
-    let labelsValuesFatigue : number[] = [];
-    let labelsValuesHalitosis : number[] = [];
-    let labelsValuesHeadCircumference : number[] = [];
-    let labelsValuesHeadache : number[] = [];
-    let labelsValuesHeartRate : number[] = [];
-    let labelsValuesHeight : number[] = [];
-    let labelsValuesHunger : number[] = [];
-    let labelsValuesImpatience : number[] = [];
-    let labelsValuesImpulseControl : number[] = [];
-    let labelsValuesIrritability : number[] = [];
-    let labelsValuesLeanBodyMass : number[] = [];
-    let labelsValuesLostWeight : number[] = [];
-    let labelsValuesOxygenSaturation : number[] = [];
-    let labelsValuesRespiratoryRate : number[] = [];
-    let labelsValuesSatiety : number[] = [];
-    let labelsValuesSleepingProblems : number[] = [];
-    let labelsValuesStimulantsNeed : number[] = [];
-    let labelsValuesSystole : number[] = [];
-    let labelsValuesTemperature : number[] = [];
-    let labelsValuesTolerance : number[] = [];
-    let labelsValuesWeight: number[] = [];
-    console.log("Labels Values Aggresiveness: " + labelsValuesAggresiveness);
-
-    let canvas = this.element.shadowRoot.querySelector('canvas');
-    //let canvas2 = this.element.shadowRoot.querySelector('#myChart1');
-    //console.log("canvas 2: " + canvas2);
+    // let labelsValuesAbdomen : number[] = [];
+    // let labelsValuesAggresiveness: number[] = [];
+    // let labelsValuesAnxiety : number[] = [];
+    // let labelsValuesBodyFatPercentage : number[] = [];
+    // let labelsValuesBodyMass : number[] = [];
+    // let labelsValuesConcentration : number[] = [];
+    // let labelsValuesConstipation : number[] = [];
+    // let labelsValuesCramps : number[] = [];
+    // let labelsValuesDepression : number[] = [];
+    // let labelsValuesDiarrhea : number[] = [];
+    // let labelsValuesDiastole : number[] = [];
+    // let labelsValuesDizziness : number[] = [];
+    // let labelsValuesFat : number[] = [];
+    // let labelsValuesFatigue : number[] = [];
+    // let labelsValuesHalitosis : number[] = [];
+    // let labelsValuesHeadCircumference : number[] = [];
+    // let labelsValuesHeadache : number[] = [];
+    // let labelsValuesHeartRate : number[] = [];
+    // let labelsValuesHeight : number[] = [];
+    // let labelsValuesHunger : number[] = [];
+    // let labelsValuesImpatience : number[] = [];
+    // let labelsValuesImpulseControl : number[] = [];
+    // let labelsValuesIrritability : number[] = [];
+    // let labelsValuesLeanBodyMass : number[] = [];
+    // let labelsValuesLostWeight : number[] = [];
+    // let labelsValuesOxygenSaturation : number[] = [];
+    // let labelsValuesRespiratoryRate : number[] = [];
+    // let labelsValuesSatiety : number[] = [];
+    // let labelsValuesSleepingProblems : number[] = [];
+    // let labelsValuesStimulantsNeed : number[] = [];
+    // let labelsValuesSystole : number[] = [];
+    // let labelsValuesTemperature : number[] = [];
+    // let labelsValuesTolerance : number[] = [];
+    // let labelsValuesWeight: number[] = [];
+    // console.log("Labels Values Aggresiveness: " + labelsValuesAggresiveness);
     
-    console.log("*************************");
-    console.log(this.vital_signs_data);    
-    console.log(this.element.shadowRoot.querySelector('canvas')); 
+    // console.log("*************************");
+    // console.log(this.vital_signs_data);    
+    // console.log(this.element.shadowRoot.querySelector('canvas')); 
 
-    for(let i=0; i<this.vital_signs_data.length; i++) {      
-      let fecha = String(([this.vital_signs_data[i]['created_at']]));
-      let fechaA = fecha.split('T');      
-      labelsDate.push(fechaA[0]);
-      console.log(' fechaA: ' , fechaA);
+    // for(let i=0; i<this.vital_signs_data.length; i++) {      
+    //   let fecha = String(([this.vital_signs_data[i]['created_at']]));
+    //   let fechaA = fecha.split('T');      
+    //   labelsDate.push(fechaA[0]);
+    //   console.log(' fechaA: ' , fechaA);
      
-      labelsValuesAbdomen.push(this.vital_signs_data[i]['elements']['abdomen']['value']|| 0 );
-      labelsValuesAggresiveness.push(this.vital_signs_data[i]['elements']['aggressiveness']['value'] || 0 );
-      labelsValuesAnxiety.push(this.vital_signs_data[i]['elements']['anxiety']['value']|| 0 );
-      labelsValuesBodyFatPercentage.push(this.vital_signs_data[i]['elements']['body_fat_percentage']['value']|| 0 );
-      labelsValuesBodyMass.push(this.vital_signs_data[i]['elements']['body_mass']['value']|| 0 );
-      labelsValuesConcentration.push(this.vital_signs_data[i]['elements']['concentration']['value']|| 0 );
-      labelsValuesConstipation.push(this.vital_signs_data[i]['elements']['constipation']['value']|| 0 );
-      labelsValuesCramps.push(this.vital_signs_data[i]['elements']['cramps']['value']|| 0 );
-      labelsValuesDepression.push(this.vital_signs_data[i]['elements']['depression']['value']|| 0 );
-      labelsValuesDiarrhea.push(this.vital_signs_data[i]['elements']['diarrhea']['value']|| 0 );
-      labelsValuesDiastole.push(this.vital_signs_data[i]['elements']['diastole']['value']|| 0 );
-      labelsValuesDizziness.push(this.vital_signs_data[i]['elements']['dizziness']['value']|| 0 );
-      labelsValuesFat.push(this.vital_signs_data[i]['elements']['fat']['value']|| 0 );
-      labelsValuesFatigue.push(this.vital_signs_data[i]['elements']['fatigue']['value']|| 0 );
-      labelsValuesHalitosis.push(this.vital_signs_data[i]['elements']['halitosis']['value']|| 0 );
-      labelsValuesHeadCircumference.push(this.vital_signs_data[i]['elements']['head_circumference']['value']|| 0 );
-      labelsValuesHeadache.push(this.vital_signs_data[i]['elements']['headache']['value']|| 0 );
-      labelsValuesHeartRate.push(this.vital_signs_data[i]['elements']['heart_rate']['value']|| 0 );
-      labelsValuesHeight.push(this.vital_signs_data[i]['elements']['height']['value']|| 0 );
-      labelsValuesHunger.push(this.vital_signs_data[i]['elements']['hunger']['value']|| 0 );
-      labelsValuesImpatience.push(this.vital_signs_data[i]['elements']['impatience']['value']|| 0 );
-      labelsValuesImpulseControl.push(this.vital_signs_data[i]['elements']['impulse_control']['value']|| 0 );
-      labelsValuesIrritability.push(this.vital_signs_data[i]['elements']['irritability']['value']|| 0 );
-      labelsValuesLeanBodyMass.push(this.vital_signs_data[i]['elements']['lean_body_mass']['value']|| 0 );
-      labelsValuesLostWeight.push(this.vital_signs_data[i]['elements']['lost_weight']['value']|| 0 );
-      labelsValuesOxygenSaturation.push(this.vital_signs_data[i]['elements']['oxygen_saturation']['value']|| 0 );
-      labelsValuesRespiratoryRate.push(this.vital_signs_data[i]['elements']['respiratory_rate']['value']|| 0 );
-      labelsValuesSatiety.push(this.vital_signs_data[i]['elements']['satiety']['value']|| 0 );
-      labelsValuesSleepingProblems.push(this.vital_signs_data[i]['elements']['sleeping_problems']['value']|| 0 );
-      labelsValuesStimulantsNeed.push(this.vital_signs_data[i]['elements']['stimulants_need']['value']|| 0 );
-      labelsValuesSystole.push(this.vital_signs_data[i]['elements']['systole']['value']|| 0 );
-      labelsValuesTemperature.push(this.vital_signs_data[i]['elements']['temperature']['value']|| 0 );
-      labelsValuesTolerance.push(this.vital_signs_data[i]['elements']['tolerance']['value']|| 0 );
-      labelsValuesWeight.push(this.vital_signs_data[i]['elements']['weight']['value']|| 0 );
-    }  
+    //   labelsValuesAbdomen.push(this.vital_signs_data[i]['elements']['abdomen']['value']|| 0 );
+    //   labelsValuesAggresiveness.push(this.vital_signs_data[i]['elements']['aggressiveness']['value'] || 0 );
+    //   labelsValuesAnxiety.push(this.vital_signs_data[i]['elements']['anxiety']['value']|| 0 );
+    //   labelsValuesBodyFatPercentage.push(this.vital_signs_data[i]['elements']['body_fat_percentage']['value']|| 0 );
+    //   labelsValuesBodyMass.push(this.vital_signs_data[i]['elements']['body_mass']['value']|| 0 );
+    //   labelsValuesConcentration.push(this.vital_signs_data[i]['elements']['concentration']['value']|| 0 );
+    //   labelsValuesConstipation.push(this.vital_signs_data[i]['elements']['constipation']['value']|| 0 );
+    //   labelsValuesCramps.push(this.vital_signs_data[i]['elements']['cramps']['value']|| 0 );
+    //   labelsValuesDepression.push(this.vital_signs_data[i]['elements']['depression']['value']|| 0 );
+    //   labelsValuesDiarrhea.push(this.vital_signs_data[i]['elements']['diarrhea']['value']|| 0 );
+    //   labelsValuesDiastole.push(this.vital_signs_data[i]['elements']['diastole']['value']|| 0 );
+    //   labelsValuesDizziness.push(this.vital_signs_data[i]['elements']['dizziness']['value']|| 0 );
+    //   labelsValuesFat.push(this.vital_signs_data[i]['elements']['fat']['value']|| 0 );
+    //   labelsValuesFatigue.push(this.vital_signs_data[i]['elements']['fatigue']['value']|| 0 );
+    //   labelsValuesHalitosis.push(this.vital_signs_data[i]['elements']['halitosis']['value']|| 0 );
+    //   labelsValuesHeadCircumference.push(this.vital_signs_data[i]['elements']['head_circumference']['value']|| 0 );
+    //   labelsValuesHeadache.push(this.vital_signs_data[i]['elements']['headache']['value']|| 0 );
+    //   labelsValuesHeartRate.push(this.vital_signs_data[i]['elements']['heart_rate']['value']|| 0 );
+    //   labelsValuesHeight.push(this.vital_signs_data[i]['elements']['height']['value']|| 0 );
+    //   labelsValuesHunger.push(this.vital_signs_data[i]['elements']['hunger']['value']|| 0 );
+    //   labelsValuesImpatience.push(this.vital_signs_data[i]['elements']['impatience']['value']|| 0 );
+    //   labelsValuesImpulseControl.push(this.vital_signs_data[i]['elements']['impulse_control']['value']|| 0 );
+    //   labelsValuesIrritability.push(this.vital_signs_data[i]['elements']['irritability']['value']|| 0 );
+    //   labelsValuesLeanBodyMass.push(this.vital_signs_data[i]['elements']['lean_body_mass']['value']|| 0 );
+    //   labelsValuesLostWeight.push(this.vital_signs_data[i]['elements']['lost_weight']['value']|| 0 );
+    //   labelsValuesOxygenSaturation.push(this.vital_signs_data[i]['elements']['oxygen_saturation']['value']|| 0 );
+    //   labelsValuesRespiratoryRate.push(this.vital_signs_data[i]['elements']['respiratory_rate']['value']|| 0 );
+    //   labelsValuesSatiety.push(this.vital_signs_data[i]['elements']['satiety']['value']|| 0 );
+    //   labelsValuesSleepingProblems.push(this.vital_signs_data[i]['elements']['sleeping_problems']['value']|| 0 );
+    //   labelsValuesStimulantsNeed.push(this.vital_signs_data[i]['elements']['stimulants_need']['value']|| 0 );
+    //   labelsValuesSystole.push(this.vital_signs_data[i]['elements']['systole']['value']|| 0 );
+    //   labelsValuesTemperature.push(this.vital_signs_data[i]['elements']['temperature']['value']|| 0 );
+    //   labelsValuesTolerance.push(this.vital_signs_data[i]['elements']['tolerance']['value']|| 0 );
+    //   labelsValuesWeight.push(this.vital_signs_data[i]['elements']['weight']['value']|| 0 );
+    // }  
 
-    console.log("Las fechas de consultas para labels son: ");
-    console.log(labelsDate);
+    // console.log("Las fechas de consultas para labels son: ");
+    // console.log(labelsDate);
     //console.log("Los valores para llenar la tabla de estatura son: ");
     //console.log(labelsValuesHeight);
 
@@ -265,29 +266,45 @@ export class MyComponent {
     //      ];        
     //  break;
     //}  
+    console.log("Did Load")
+    let canvas = this.element.shadowRoot.querySelector('canvas#unagrafica');
+    console.log(canvas)
 
     const data = {
-      labels: labelsDate,
+      labels: this.labelsDate,
       datasets: [
         {
           label: 'Weight',
-          data: labelsValuesWeight,
+          data: this.labelsValuesWeight,
           borderColor: 'rgb(155, 99, 132)',          
         }
       ]
     };
 
-    var myChart = new chartjs(canvas, {
+    this.myChart = new chartjs(canvas, {
       type: 'line',
       data: data,      
       options: {}
     })
-    //var myChart1 = new chartjs(canvas2, {
-    //  type: 'line',
-    //  data: data,      
-    //  options: {}
-    //})
 
+  }
+
+  actualizarDataDeGraficas() {
+    console.log("actualizarDataDeGraficas")
+    for(let i=0; i<this.vital_signs_data.length; i++) {
+      let fecha = String(([this.vital_signs_data[i]['created_at']]));
+      let fechaA = fecha.split('T');      
+      this.labelsDate.push(fechaA[0]);
+
+      this.labelsValuesWeight.push(this.getNormalizedValue(this.vital_signs_data[i],'weight'));
+    }
+    this.myChart.update()
+    console.log(this.labelsValuesWeight)
+  }
+
+  getNormalizedValue(item, attributeName) {
+    if(!item['elements'][attributeName]) return 0
+    return( item['elements'][attributeName]['value'] || 0 )
   }
 
   // Pendientes:
@@ -311,7 +328,7 @@ export class MyComponent {
         } <span class="vitalSignsUnidades">{signo_vital.unit}</span>
       </td>
       <td>
-        <canvas id="myChart" width="300" height="200"></canvas>
+        <canvas id="unagrafica" width="300" height="200"></canvas>
       </td>
       <td>
         <canvas id="myChart1" width="300" height="200"></canvas>
