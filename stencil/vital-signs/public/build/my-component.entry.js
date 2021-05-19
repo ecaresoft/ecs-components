@@ -12715,8 +12715,46 @@ const MyComponent = class {
         registerInstance(this, hostRef);
         this.timer = 0;
         this.request = {};
-        this.labelsValuesWeight = [];
         this.labelsDate = [];
+        this.obtenerDataSets = [];
+        this.obtenerDate = [];
+        this.multi = [[], []];
+        this.obtenerRgb = {
+            abdomen: 'rgb(129, 183, 201)',
+            aggressiveness: 'rgb(129, 183, 201)',
+            anxiety: 'rgb(129, 183, 201)',
+            body_fat_percentage: 'rgb(245, 130, 57)',
+            body_mass: 'rgb(191, 219, 109)',
+            concentration: 'rgb(129, 183, 201)',
+            constipation: 'rgb(129, 183, 201)',
+            cramps: 'rgb(129, 183, 201)',
+            depression: 'rgb(129, 183, 201)',
+            diarrhea: 'rgb(129, 183, 201)',
+            diastole: 'rgb(195, 0, 71)',
+            dizziness: 'rgb(129, 183, 201)',
+            fat: 'rgb(129, 183, 201)',
+            fatigue: 'rgb(129, 183, 201)',
+            halitosis: 'rgb(129, 183, 201)',
+            head_circumference: 'rgb(9, 111, 168)',
+            headache: 'rgb(129, 183, 201)',
+            heart_rate: 'rgb(215, 82, 154)',
+            height: 'rgb(149, 125, 186)',
+            hunger: 'rgb(129, 183, 201)',
+            impatience: 'rgb(129, 183, 201)',
+            impulse_control: 'rgb(129, 183, 201)',
+            irritability: 'rgb(129, 183, 201)',
+            lean_body_mass: 'rgb(244, 146, 158)',
+            lost_weight: 'rgb(129, 183, 201)',
+            oxygen_saturation: 'rgb(110, 179, 237)',
+            respiratory_rate: 'rgb(131, 206, 228)',
+            satiety: 'rgb(129, 183, 201)',
+            sleeping_problems: 'rgb(129, 183, 201)',
+            stimulants_need: 'rgb(129, 183, 201)',
+            systole: 'rgb(255, 64, 92)',
+            temperature: 'rgb(79, 209, 136)',
+            tolerance: 'rgb(129, 183, 201)',
+            weight: 'rgb(94, 169, 241)'
+        };
     }
     async consultaVitalSigns() {
         if (this.vital_signs_person_id) {
@@ -12793,131 +12831,20 @@ const MyComponent = class {
     render() {
         return (h("div", null, h("div", { class: "vitalSigns" }, h("table", { class: "vitalSignsTabla" }, this.renderRow("Estatura", "height"), this.renderRow("Peso", "weight"), this.renderRow("Masa Corporal", "body_mass"), this.renderRow("Temperatura", "temperature"), this.renderRow("Frecuencia Respiratoria", "respiratory_rate"), this.renderRow("Sistólica", "systole"), this.renderRow("Diastólica", "diastole"), this.renderRow("Frecuencia Cardiaca", "heart_rate"), this.renderRow("Porcentaje de Grasa Corporal", "body_fat_percentage"), this.renderRow("Masa Muscular", "lean_body_mass"), this.renderRow("Perímetro Cefálico", "head_circumference"), this.renderRow("Saturación de Oxígeno", "oxygen_saturation")))));
     }
-    // Códigos de color para cada Vital Sign:
-    // Estatura"                      rgb(149, 125, 186)
-    // Peso"                          rgb(94, 169, 241)
-    // Masa Corporal"                 rgb(191, 219, 109)
-    // Temperatura"                   rgb(79, 209, 136)
-    // Frecuencia Respiratoria"       rgb(131, 206, 228)
-    // Sistólica"                     rgb(255, 64, 92)
-    // Diastólica"                    rgb(195, 0, 71)
-    // Frecuencia Cardiaca"           rgb(215, 82, 154)           
-    // Porcentaje de Grasa Corporal"  rgb(245, 130, 57)
-    // Masa Muscular"                 rgb(244, 146, 158)
-    // Perímetro Cefálico"            rgb(9, 111, 168)
-    // Saturación de Oxígeno"         rgb(110, 179, 237)
     componentDidLoad() {
-        // let labelsDate: string[] = [];
-        // let labelsValuesAbdomen : number[] = [];
-        // let labelsValuesAggresiveness: number[] = [];
-        // let labelsValuesAnxiety : number[] = [];
-        // let labelsValuesBodyFatPercentage : number[] = [];
-        // let labelsValuesBodyMass : number[] = [];
-        // let labelsValuesConcentration : number[] = [];
-        // let labelsValuesConstipation : number[] = [];
-        // let labelsValuesCramps : number[] = [];
-        // let labelsValuesDepression : number[] = [];
-        // let labelsValuesDiarrhea : number[] = [];
-        // let labelsValuesDiastole : number[] = [];
-        // let labelsValuesDizziness : number[] = [];
-        // let labelsValuesFat : number[] = [];
-        // let labelsValuesFatigue : number[] = [];
-        // let labelsValuesHalitosis : number[] = [];
-        // let labelsValuesHeadCircumference : number[] = [];
-        // let labelsValuesHeadache : number[] = [];
-        // let labelsValuesHeartRate : number[] = [];
-        // let labelsValuesHeight : number[] = [];
-        // let labelsValuesHunger : number[] = [];
-        // let labelsValuesImpatience : number[] = [];
-        // let labelsValuesImpulseControl : number[] = [];
-        // let labelsValuesIrritability : number[] = [];
-        // let labelsValuesLeanBodyMass : number[] = [];
-        // let labelsValuesLostWeight : number[] = [];
-        // let labelsValuesOxygenSaturation : number[] = [];
-        // let labelsValuesRespiratoryRate : number[] = [];
-        // let labelsValuesSatiety : number[] = [];
-        // let labelsValuesSleepingProblems : number[] = [];
-        // let labelsValuesStimulantsNeed : number[] = [];
-        // let labelsValuesSystole : number[] = [];
-        // let labelsValuesTemperature : number[] = [];
-        // let labelsValuesTolerance : number[] = [];
-        // let labelsValuesWeight: number[] = [];
-        // console.log("Labels Values Aggresiveness: " + labelsValuesAggresiveness);
-        // console.log("*************************");
-        // console.log(this.vital_signs_data);    
-        // console.log(this.element.shadowRoot.querySelector('canvas')); 
-        // for(let i=0; i<this.vital_signs_data.length; i++) {      
-        //   let fecha = String(([this.vital_signs_data[i]['created_at']]));
-        //   let fechaA = fecha.split('T');      
-        //   labelsDate.push(fechaA[0]);
-        //   console.log(' fechaA: ' , fechaA);
-        //   labelsValuesAbdomen.push(this.vital_signs_data[i]['elements']['abdomen']['value']|| 0 );
-        //   labelsValuesAggresiveness.push(this.vital_signs_data[i]['elements']['aggressiveness']['value'] || 0 );
-        //   labelsValuesAnxiety.push(this.vital_signs_data[i]['elements']['anxiety']['value']|| 0 );
-        //   labelsValuesBodyFatPercentage.push(this.vital_signs_data[i]['elements']['body_fat_percentage']['value']|| 0 );
-        //   labelsValuesBodyMass.push(this.vital_signs_data[i]['elements']['body_mass']['value']|| 0 );
-        //   labelsValuesConcentration.push(this.vital_signs_data[i]['elements']['concentration']['value']|| 0 );
-        //   labelsValuesConstipation.push(this.vital_signs_data[i]['elements']['constipation']['value']|| 0 );
-        //   labelsValuesCramps.push(this.vital_signs_data[i]['elements']['cramps']['value']|| 0 );
-        //   labelsValuesDepression.push(this.vital_signs_data[i]['elements']['depression']['value']|| 0 );
-        //   labelsValuesDiarrhea.push(this.vital_signs_data[i]['elements']['diarrhea']['value']|| 0 );
-        //   labelsValuesDiastole.push(this.vital_signs_data[i]['elements']['diastole']['value']|| 0 );
-        //   labelsValuesDizziness.push(this.vital_signs_data[i]['elements']['dizziness']['value']|| 0 );
-        //   labelsValuesFat.push(this.vital_signs_data[i]['elements']['fat']['value']|| 0 );
-        //   labelsValuesFatigue.push(this.vital_signs_data[i]['elements']['fatigue']['value']|| 0 );
-        //   labelsValuesHalitosis.push(this.vital_signs_data[i]['elements']['halitosis']['value']|| 0 );
-        //   labelsValuesHeadCircumference.push(this.vital_signs_data[i]['elements']['head_circumference']['value']|| 0 );
-        //   labelsValuesHeadache.push(this.vital_signs_data[i]['elements']['headache']['value']|| 0 );
-        //   labelsValuesHeartRate.push(this.vital_signs_data[i]['elements']['heart_rate']['value']|| 0 );
-        //   labelsValuesHeight.push(this.vital_signs_data[i]['elements']['height']['value']|| 0 );
-        //   labelsValuesHunger.push(this.vital_signs_data[i]['elements']['hunger']['value']|| 0 );
-        //   labelsValuesImpatience.push(this.vital_signs_data[i]['elements']['impatience']['value']|| 0 );
-        //   labelsValuesImpulseControl.push(this.vital_signs_data[i]['elements']['impulse_control']['value']|| 0 );
-        //   labelsValuesIrritability.push(this.vital_signs_data[i]['elements']['irritability']['value']|| 0 );
-        //   labelsValuesLeanBodyMass.push(this.vital_signs_data[i]['elements']['lean_body_mass']['value']|| 0 );
-        //   labelsValuesLostWeight.push(this.vital_signs_data[i]['elements']['lost_weight']['value']|| 0 );
-        //   labelsValuesOxygenSaturation.push(this.vital_signs_data[i]['elements']['oxygen_saturation']['value']|| 0 );
-        //   labelsValuesRespiratoryRate.push(this.vital_signs_data[i]['elements']['respiratory_rate']['value']|| 0 );
-        //   labelsValuesSatiety.push(this.vital_signs_data[i]['elements']['satiety']['value']|| 0 );
-        //   labelsValuesSleepingProblems.push(this.vital_signs_data[i]['elements']['sleeping_problems']['value']|| 0 );
-        //   labelsValuesStimulantsNeed.push(this.vital_signs_data[i]['elements']['stimulants_need']['value']|| 0 );
-        //   labelsValuesSystole.push(this.vital_signs_data[i]['elements']['systole']['value']|| 0 );
-        //   labelsValuesTemperature.push(this.vital_signs_data[i]['elements']['temperature']['value']|| 0 );
-        //   labelsValuesTolerance.push(this.vital_signs_data[i]['elements']['tolerance']['value']|| 0 );
-        //   labelsValuesWeight.push(this.vital_signs_data[i]['elements']['weight']['value']|| 0 );
-        // }  
-        // console.log("Las fechas de consultas para labels son: ");
-        // console.log(labelsDate);
-        //console.log("Los valores para llenar la tabla de estatura son: ");
-        //console.log(labelsValuesHeight);
-        //let data = dataHeight;
-        //switch (data){
-        //  case 'dataHeight':
-        //    labels: labelsDate
-        //    datasets: [
-        //        {
-        //          label: 'Height',
-        //          data: labelsValuesHeight,
-        //          borderColor: 'rgb(55, 199, 132)',          
-        //        }
-        //      ];        
-        //  break;
-        //}  
         console.log("Did Load");
         let canvas = this.element.shadowRoot.querySelectorAll('canvas');
-        const data = {
-            labels: this.labelsDate,
-            datasets: [
-                {
-                    label: 'Weight',
-                    data: this.labelsValuesWeight,
-                    borderColor: 'rgb(155, 99, 132)',
-                }
-            ]
-        };
         this.myChart = [];
         for (let i = 0; i <= canvas.length; i++) {
             console.log(canvas[i]);
+            let nameVitalSign = canvas[i].id;
+            //this.obtenerDataSets[nameVitalSign];
+            let data = {
+                labels: this.labelsDate,
+                datasets: [
+                    this.obtenerDataSets[nameVitalSign]
+                ]
+            };
             this.myChart[i] = new Chart(canvas[i], {
                 type: 'line',
                 data: data,
@@ -12925,13 +12852,35 @@ const MyComponent = class {
             });
         }
     }
+    obtenerValoresElemento(elemento) {
+        let valores = [];
+        for (let i = 0; i < this.vital_signs_data.length; i++) {
+            //let element = this.vital_signs_data[i]['elements'][elemento];
+            valores.push(this.getNormalizedValue(this.vital_signs_data[i], elemento));
+        }
+        return valores;
+    }
     actualizarDataDeGraficas() {
         console.log("actualizarDataDeGraficas");
+        this.labelsDate = [];
         for (let i = 0; i < this.vital_signs_data.length; i++) {
             let fecha = String(([this.vital_signs_data[i]['created_at']]));
             let fechaA = fecha.split('T');
             this.labelsDate.push(fechaA[0]);
-            this.labelsValuesWeight.push(this.getNormalizedValue(this.vital_signs_data[i], 'weight'));
+            if (i == 0) {
+                let vitalSign = this.vital_signs_data[i];
+                console.log(vitalSign);
+                //let elementKeys = Object.keys(vitalSign['elements']);
+                //for(let j=0; j<vitalSign['elements'].length; j++){
+                for (const key in vitalSign['elements']) {
+                    //let element = vitalSign['elements'][key];
+                    this.obtenerDataSets[key] = {
+                        label: key,
+                        data: this.obtenerValoresElemento(key),
+                        borderColor: this.obtenerRgb[key] ? this.obtenerRgb[key] : "rgb(129, 183, 201)"
+                    };
+                }
+            }
         }
         // this.myChart.update()
         if (this.myChart !== undefined && Array.isArray(this.myChart)) {
@@ -12941,22 +12890,17 @@ const MyComponent = class {
                 }
             }
         }
-        console.log(this.labelsValuesWeight);
     }
     getNormalizedValue(item, attributeName) {
         if (!item['elements'][attributeName])
             return 0;
         return (item['elements'][attributeName]['value'] || 0);
     }
-    // Pendientes:
-    // 1.- Crear un diccionario o estructura donde almacenar todos los rgb de acuerdo al Vital sign
-    // 2.- Dibujar todas las charts debajo de cada vital sign
-    // 3.- Poner ids a cada chart acorde al element_name
     renderRow(label, element_name) {
         var signo_vital = this.extraerSignoVital(this.vital_signs_data, element_name);
         return (h("tr", null, h("td", null, " ", h("stencil-asset", { icon: element_name })), h("td", { class: "vitalSignsTextos" }, label), h("td", { class: "vitalSignsValores" }, this.vital_signs_account_id
             ? h("input", { name: element_name, type: "number", value: signo_vital.value, onInput: (e) => this.handleChange(e) })
-            : h("span", { class: "vitalSignsValores" }, signo_vital.value), " ", h("span", { class: "vitalSignsUnidades" }, signo_vital.unit)), h("td", null, h("canvas", { id: "unagrafica", width: "300", height: "200" })), h("td", null, h("canvas", { id: "myChart1", width: "300", height: "200" }))));
+            : h("span", { class: "vitalSignsValores" }, signo_vital.value), " ", h("span", { class: "vitalSignsUnidades" }, signo_vital.unit)), h("td", null, h("canvas", { id: element_name, width: "300", height: "200" }))));
     }
     get element() { return getElement(this); }
 };
