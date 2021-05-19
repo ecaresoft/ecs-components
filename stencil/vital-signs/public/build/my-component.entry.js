@@ -12904,8 +12904,7 @@ const MyComponent = class {
         //  break;
         //}  
         console.log("Did Load");
-        let canvas = this.element.shadowRoot.querySelector('canvas');
-        console.log(canvas);
+        let canvas = this.element.shadowRoot.querySelectorAll('canvas');
         const data = {
             labels: this.labelsDate,
             datasets: [
@@ -12916,11 +12915,15 @@ const MyComponent = class {
                 }
             ]
         };
-        this.myChart = new Chart(canvas, {
-            type: 'line',
-            data: data,
-            options: {}
-        });
+        this.myChart = [];
+        for (let i = 0; i <= canvas.length; i++) {
+            console.log(canvas[i]);
+            this.myChart[i] = new Chart(canvas[i], {
+                type: 'line',
+                data: data,
+                options: {}
+            });
+        }
     }
     actualizarDataDeGraficas() {
         console.log("actualizarDataDeGraficas");
@@ -12930,7 +12933,14 @@ const MyComponent = class {
             this.labelsDate.push(fechaA[0]);
             this.labelsValuesWeight.push(this.getNormalizedValue(this.vital_signs_data[i], 'weight'));
         }
-        this.myChart.update();
+        // this.myChart.update()
+        if (this.myChart !== undefined && Array.isArray(this.myChart)) {
+            for (let j = 0; j < this.myChart.length; j++) {
+                if (this.myChart[j]) {
+                    this.myChart[j].update();
+                }
+            }
+        }
         console.log(this.labelsValuesWeight);
     }
     getNormalizedValue(item, attributeName) {
