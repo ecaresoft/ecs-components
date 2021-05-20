@@ -185,7 +185,7 @@ export class MyComponent {
           </table>
         </div>        
       </div>
-      )      
+      )
   }
 
   componentDidLoad() {
@@ -266,20 +266,23 @@ export class MyComponent {
     var signo_vital = this.extraerSignoVital(this.vital_signs_data, element_name)
     return (
       <tr>
-      <td> <stencil-asset icon={element_name}></stencil-asset></td>
-      <td class="vitalSignsTextos">{label}</td>
-      <td class="vitalSignsValores">
-        {
-          this.vital_signs_account_id
-          ? <input name={element_name}  type="number" value={signo_vital.value} 
-          onInput={(e) => this.handleChange(e)} />
-          : <span class="vitalSignsValores">{signo_vital.value}</span>
-        } <span class="vitalSignsUnidades">{signo_vital.unit}</span>
-      </td>
-      <td>
-        <canvas id={element_name} width="300" height="200"></canvas>
-      </td>
-    </tr>
+        <td><stencil-asset icon={element_name}></stencil-asset></td>
+        <td class="vitalSignsTextos">{label}</td>
+        <td class="vitalSignsValores">
+          {
+            this.vital_signs_account_id
+            ? <input name={element_name}  type="number" value={signo_vital.value} 
+            onInput={(e) => this.handleChange(e)} />
+            : <span class="vitalSignsValores">{signo_vital.value}</span>
+          } <span class="vitalSignsUnidades">{signo_vital.unit}</span>
+        </td>
+        <td>
+       <div>
+         {/* <button></button> */}
+          <canvas id={element_name} width="300" height="200"></canvas>
+        </div>
+        </td>
+      </tr>
     )
   }
 }

@@ -6,6 +6,10 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface CollapsibleChart {
+        "title": string;
+        "toggle": () => Promise<void>;
+    }
     interface MyComponent {
         "environment": string;
         "obtenerRgb": any;
@@ -23,6 +27,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLCollapsibleChartElement extends Components.CollapsibleChart, HTMLStencilElement {
+    }
+    var HTMLCollapsibleChartElement: {
+        prototype: HTMLCollapsibleChartElement;
+        new (): HTMLCollapsibleChartElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -42,12 +52,16 @@ declare global {
         new (): HTMLStencilAssetElement;
     };
     interface HTMLElementTagNameMap {
+        "collapsible-chart": HTMLCollapsibleChartElement;
         "my-component": HTMLMyComponentElement;
         "my-name": HTMLMyNameElement;
         "stencil-asset": HTMLStencilAssetElement;
     }
 }
 declare namespace LocalJSX {
+    interface CollapsibleChart {
+        "title"?: string;
+    }
     interface MyComponent {
         "environment"?: string;
         "obtenerRgb"?: any;
@@ -64,6 +78,7 @@ declare namespace LocalJSX {
         "icon"?: string;
     }
     interface IntrinsicElements {
+        "collapsible-chart": CollapsibleChart;
         "my-component": MyComponent;
         "my-name": MyName;
         "stencil-asset": StencilAsset;
@@ -73,6 +88,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "collapsible-chart": LocalJSX.CollapsibleChart & JSXBase.HTMLAttributes<HTMLCollapsibleChartElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "my-name": LocalJSX.MyName & JSXBase.HTMLAttributes<HTMLMyNameElement>;
             "stencil-asset": LocalJSX.StencilAsset & JSXBase.HTMLAttributes<HTMLStencilAssetElement>;

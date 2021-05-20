@@ -1,4 +1,4 @@
-import { r as registerInstance, h, g as getElement } from './index-ecc28489.js';
+import { r as registerInstance, h, g as getElement } from './index-7678e4f3.js';
 
 const ENV = {
     apiBasePath: 'api/v1',
@@ -12707,7 +12707,7 @@ const registerables = [
   scales,
 ];
 
-const myComponentCss = ":host{font-family:\"Proxima Nova\", Helvetica, Arial, sans-serif}input{color:#59636d;font-size:14px;padding:6px;width:40%;text-align:center}div{display:flex;justify-content:center}td{margin:2px;border-bottom:1px solid #f9fbfc}.vitalSignsTextos{color:#59636d;font-size:14px;padding:16px}.vitalSignsUnidades{min-width:50px;color:#7f95bb}.vitalSignsValores{color:#59636d;margin-left:12px;margin-right:6px}";
+const myComponentCss = ":host{font-family:\"Proxima Nova\", Helvetica, Arial, sans-serif}input{color:#59636d;font-size:14px;padding:6px;width:40%;text-align:center}div{display:flex;justify-content:center}td{margin:2px;border-bottom:1px solid #f9fbfc}.vitalSignsTextos{color:#59636d;font-size:14px;padding:16px}.vitalSignsUnidades{min-width:50px;color:#7f95bb}.vitalSignsValores{color:#59636d;margin-left:12px;margin-right:6px}.collapsible{background-color:#eee;color:#444;cursor:pointer;padding:10px;width:100%;border:none;text-align:left;outline:none;font-size:12px}.active,.collapsible:hover{background-color:#ccc}.content{padding:0 18px;display:none;overflow:hidden;background-color:#f1f1f1}";
 
 Chart.register(...registerables);
 const MyComponent = class {
@@ -12898,9 +12898,9 @@ const MyComponent = class {
     }
     renderRow(label, element_name) {
         var signo_vital = this.extraerSignoVital(this.vital_signs_data, element_name);
-        return (h("tr", null, h("td", null, " ", h("stencil-asset", { icon: element_name })), h("td", { class: "vitalSignsTextos" }, label), h("td", { class: "vitalSignsValores" }, this.vital_signs_account_id
+        return (h("tr", null, h("td", null, h("stencil-asset", { icon: element_name })), h("td", { class: "vitalSignsTextos" }, label), h("td", { class: "vitalSignsValores" }, this.vital_signs_account_id
             ? h("input", { name: element_name, type: "number", value: signo_vital.value, onInput: (e) => this.handleChange(e) })
-            : h("span", { class: "vitalSignsValores" }, signo_vital.value), " ", h("span", { class: "vitalSignsUnidades" }, signo_vital.unit)), h("td", null, h("canvas", { id: element_name, width: "300", height: "200" }))));
+            : h("span", { class: "vitalSignsValores" }, signo_vital.value), " ", h("span", { class: "vitalSignsUnidades" }, signo_vital.unit)), h("td", null, h("div", null, h("canvas", { id: element_name, width: "300", height: "200" })))));
     }
     get element() { return getElement(this); }
 };

@@ -1,4 +1,4 @@
-import { r as registerInstance, h, e as getAssetPath } from './index-ecc28489.js';
+import { r as registerInstance, h, e as getAssetPath } from './index-7678e4f3.js';
 
 const stencilAssetCss = "";
 
