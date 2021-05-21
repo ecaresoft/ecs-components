@@ -183,7 +183,7 @@ export class MyComponent {
             {this.renderRow("Perímetro Cefálico", "head_circumference")}
             {this.renderRow("Saturación de Oxígeno", "oxygen_saturation")}
           </table>
-        </div>        
+        </div>
       </div>
       )
   }
@@ -191,10 +191,14 @@ export class MyComponent {
   componentDidLoad() {
     console.log("Did Load")
   
-    let canvas = this.element.shadowRoot.querySelectorAll('canvas');
+   // this.drawCanvas();
+  }
 
+drawCanvas(){
+  let canvas = this.element.shadowRoot.querySelectorAll('canvas');
+  //debugger
   this.myChart =[];
-    for (let i=0; i<=canvas.length; i++){
+    for (let i=0; i<canvas.length; i++){
       console.log(canvas[i])
       let nameVitalSign = canvas[i].id;
       //this.obtenerDataSets[nameVitalSign];
@@ -212,7 +216,7 @@ export class MyComponent {
         options: {}
       })
     }
-  }
+}
 
   obtenerValoresElemento(elemento){
     let valores = [];
@@ -238,7 +242,8 @@ export class MyComponent {
       //let elementKeys = Object.keys(vitalSign['elements']);
       //for(let j=0; j<vitalSign['elements'].length; j++){
       for (const key in vitalSign['elements']) {
-          //let element = vitalSign['elements'][key];
+          //debugger
+        //let element = vitalSign['elements'][key];
           this.obtenerDataSets[key] = {
             label: key,
             data: this.obtenerValoresElemento(key),
@@ -246,6 +251,9 @@ export class MyComponent {
           };
         }
       }
+    }
+    if(this.myChart === undefined ){
+      this.drawCanvas();
     }
    // this.myChart.update()
     if(this.myChart !== undefined && Array.isArray(this.myChart)){      
@@ -276,11 +284,10 @@ export class MyComponent {
             : <span class="vitalSignsValores">{signo_vital.value}</span>
           } <span class="vitalSignsUnidades">{signo_vital.unit}</span>
         </td>
-        <td>
-       <div>
-         {/* <button></button> */}
-          <canvas id={element_name} width="300" height="200"></canvas>
-        </div>
+        <td>        
+          <collapsible-chart title="▼">
+            <canvas id={element_name} width="300" height="200"></canvas>
+          </collapsible-chart>
         </td>
       </tr>
     )

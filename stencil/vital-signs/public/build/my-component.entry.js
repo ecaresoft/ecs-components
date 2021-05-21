@@ -12833,9 +12833,13 @@ const MyComponent = class {
     }
     componentDidLoad() {
         console.log("Did Load");
+        // this.drawCanvas();
+    }
+    drawCanvas() {
         let canvas = this.element.shadowRoot.querySelectorAll('canvas');
+        //debugger
         this.myChart = [];
-        for (let i = 0; i <= canvas.length; i++) {
+        for (let i = 0; i < canvas.length; i++) {
             console.log(canvas[i]);
             let nameVitalSign = canvas[i].id;
             //this.obtenerDataSets[nameVitalSign];
@@ -12873,6 +12877,7 @@ const MyComponent = class {
                 //let elementKeys = Object.keys(vitalSign['elements']);
                 //for(let j=0; j<vitalSign['elements'].length; j++){
                 for (const key in vitalSign['elements']) {
+                    //debugger
                     //let element = vitalSign['elements'][key];
                     this.obtenerDataSets[key] = {
                         label: key,
@@ -12881,6 +12886,9 @@ const MyComponent = class {
                     };
                 }
             }
+        }
+        if (this.myChart === undefined) {
+            this.drawCanvas();
         }
         // this.myChart.update()
         if (this.myChart !== undefined && Array.isArray(this.myChart)) {
@@ -12900,7 +12908,7 @@ const MyComponent = class {
         var signo_vital = this.extraerSignoVital(this.vital_signs_data, element_name);
         return (h("tr", null, h("td", null, h("stencil-asset", { icon: element_name })), h("td", { class: "vitalSignsTextos" }, label), h("td", { class: "vitalSignsValores" }, this.vital_signs_account_id
             ? h("input", { name: element_name, type: "number", value: signo_vital.value, onInput: (e) => this.handleChange(e) })
-            : h("span", { class: "vitalSignsValores" }, signo_vital.value), " ", h("span", { class: "vitalSignsUnidades" }, signo_vital.unit)), h("td", null, h("div", null, h("canvas", { id: element_name, width: "300", height: "200" })))));
+            : h("span", { class: "vitalSignsValores" }, signo_vital.value), " ", h("span", { class: "vitalSignsUnidades" }, signo_vital.unit)), h("td", null, h("collapsible-chart", { title: "\u25BC" }, h("canvas", { id: element_name, width: "300", height: "200" })))));
     }
     get element() { return getElement(this); }
 };

@@ -7,7 +7,7 @@ import {Component, h, Prop, State, Method} from '@stencil/core';
 })
 export class CollapsibleChart {
   @Prop() title: string;
-  @State() collapsed: boolean;
+  @State() collapsed = true;
 
   @Method()
   toggle() {
@@ -21,7 +21,7 @@ export class CollapsibleChart {
 
   render() {
     return (
-        <div>
+        <div class="contenedorChart">
             <div id="header" onClick={this.toggle.bind(this)}>
                 <span>{this.title}</span>
             </div>
