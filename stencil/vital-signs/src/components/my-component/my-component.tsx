@@ -167,9 +167,7 @@ export class MyComponent {
 
   render() {
     return (
-      <div>
         <div class="vitalSigns">
-          <table class="vitalSignsTabla">
             {this.renderRow("Estatura", "height")}
             {this.renderRow("Peso", "weight")}
             {this.renderRow("Masa Corporal", "body_mass")}
@@ -182,9 +180,7 @@ export class MyComponent {
             {this.renderRow("Masa Muscular", "lean_body_mass")}
             {this.renderRow("Perímetro Cefálico", "head_circumference")}
             {this.renderRow("Saturación de Oxígeno", "oxygen_saturation")}
-          </table>
         </div>
-      </div>
       )
   }
 
@@ -271,25 +267,27 @@ drawCanvas(){
   }
 
   renderRow(label, element_name) {
+    console.log(this.vital_signs_data)
+    console.log(element_name)
     var signo_vital = this.extraerSignoVital(this.vital_signs_data, element_name)
     return (
-      <tr>
-        <td><stencil-asset icon={element_name}></stencil-asset></td>
-        <td class="vitalSignsTextos">{label}</td>
-        <td class="vitalSignsValores">
+      <div>
+        <div><stencil-asset icon={element_name}></stencil-asset></div>
+        <div class="vitalSignsTextos">{label}</div>
+        <div class="vitalSignsValores">
           {
             this.vital_signs_account_id
             ? <input name={element_name}  type="number" value={signo_vital.value} 
             onInput={(e) => this.handleChange(e)} />
             : <span class="vitalSignsValores">{signo_vital.value}</span>
           } <span class="vitalSignsUnidades">{signo_vital.unit}</span>
-        </td>
-        <td>        
+        </div>
+        <div class="grafica">        
           <collapsible-chart title="▼">
-            <canvas id={element_name} width="300" height="200"></canvas>
+            <canvas id={element_name} width="100%" height="100%"></canvas>
           </collapsible-chart>
-        </td>
-      </tr>
+        </div>
+      </div>
     )
   }
 }

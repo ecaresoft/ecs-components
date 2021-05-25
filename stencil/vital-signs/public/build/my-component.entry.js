@@ -12829,7 +12829,7 @@ const MyComponent = class {
         this.timer = window.setTimeout(() => { this.updateVitalSignSet(); }, 5000);
     }
     render() {
-        return (h("div", null, h("div", { class: "vitalSigns" }, h("table", { class: "vitalSignsTabla" }, this.renderRow("Estatura", "height"), this.renderRow("Peso", "weight"), this.renderRow("Masa Corporal", "body_mass"), this.renderRow("Temperatura", "temperature"), this.renderRow("Frecuencia Respiratoria", "respiratory_rate"), this.renderRow("Sistólica", "systole"), this.renderRow("Diastólica", "diastole"), this.renderRow("Frecuencia Cardiaca", "heart_rate"), this.renderRow("Porcentaje de Grasa Corporal", "body_fat_percentage"), this.renderRow("Masa Muscular", "lean_body_mass"), this.renderRow("Perímetro Cefálico", "head_circumference"), this.renderRow("Saturación de Oxígeno", "oxygen_saturation")))));
+        return (h("div", { class: "vitalSigns" }, this.renderRow("Estatura", "height"), this.renderRow("Peso", "weight"), this.renderRow("Masa Corporal", "body_mass"), this.renderRow("Temperatura", "temperature"), this.renderRow("Frecuencia Respiratoria", "respiratory_rate"), this.renderRow("Sistólica", "systole"), this.renderRow("Diastólica", "diastole"), this.renderRow("Frecuencia Cardiaca", "heart_rate"), this.renderRow("Porcentaje de Grasa Corporal", "body_fat_percentage"), this.renderRow("Masa Muscular", "lean_body_mass"), this.renderRow("Perímetro Cefálico", "head_circumference"), this.renderRow("Saturación de Oxígeno", "oxygen_saturation")));
     }
     componentDidLoad() {
         console.log("Did Load");
@@ -12905,10 +12905,12 @@ const MyComponent = class {
         return (item['elements'][attributeName]['value'] || 0);
     }
     renderRow(label, element_name) {
+        console.log(this.vital_signs_data);
+        console.log(element_name);
         var signo_vital = this.extraerSignoVital(this.vital_signs_data, element_name);
-        return (h("tr", null, h("td", null, h("stencil-asset", { icon: element_name })), h("td", { class: "vitalSignsTextos" }, label), h("td", { class: "vitalSignsValores" }, this.vital_signs_account_id
+        return (h("div", null, h("div", null, h("stencil-asset", { icon: element_name })), h("div", { class: "vitalSignsTextos" }, label), h("div", { class: "vitalSignsValores" }, this.vital_signs_account_id
             ? h("input", { name: element_name, type: "number", value: signo_vital.value, onInput: (e) => this.handleChange(e) })
-            : h("span", { class: "vitalSignsValores" }, signo_vital.value), " ", h("span", { class: "vitalSignsUnidades" }, signo_vital.unit)), h("td", null, h("collapsible-chart", { title: "\u25BC" }, h("canvas", { id: element_name, width: "300", height: "200" })))));
+            : h("span", { class: "vitalSignsValores" }, signo_vital.value), " ", h("span", { class: "vitalSignsUnidades" }, signo_vital.unit)), h("div", { class: "grafica" }, h("collapsible-chart", { title: "\u25BC" }, h("canvas", { id: element_name, width: "100%", height: "100%" })))));
     }
     get element() { return getElement(this); }
 };
