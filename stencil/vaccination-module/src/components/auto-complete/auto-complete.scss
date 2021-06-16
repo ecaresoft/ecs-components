@@ -1,82 +1,68 @@
 .xeph-div {
-  position: relative;
-  margin-left: 14px;
-  margin-bottom: 20px;
+    position: relative;
+    padding: 15px;
 }
 
 .xeph-input {
-  border-width: 1px;
-  border-color: #d9e3eb;
-  border-style: solid;
-  border-radius: 2px;
-  height: 30px;
-  padding-top: 6px;
-  padding-right: 12px;
-  padding-bottom: 6px;
-  padding-left:12px;
-  width: 94%;
-  outline: solid 1px #d9e3eb;
+    border-width: 1px;
+    border: 1px solid #d9e3eb;
+    height: 30px;
+    padding: 6px 12px;
+    width: 96%;
 }
 
 @media only screen and (max-width: 500px) {
-  .xeph-input {
-    width: 90%;
-  }
-} 
-
-.xeph-input:focus{
-  border-style: solid;
-  border-width: 1px;
-  border-color: #0176fe;
-  border-radius: 2px;
-  height: 30px;
-  padding-top: 6px;
-  padding-right: 12px;
-  padding-bottom: 6px;
-  padding-left:12px;
-  outline: none;
+    .xeph-input {
+        width: 100%;
+    }
 }
 
-.input-serach {
-  background-image: url("data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJzZWFyY2giIGNsYXNzPSJzdmctaW5saW5lLS1mYSBmYS1zZWFyY2ggZmEtdy0xNiIgcm9sZT0iaW1nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik01MDUgNDQyLjdMNDA1LjMgMzQzYy00LjUtNC41LTEwLjYtNy0xNy03SDM3MmMyNy42LTM1LjMgNDQtNzkuNyA0NC0xMjhDNDE2IDkzLjEgMzIyLjkgMCAyMDggMFMwIDkzLjEgMCAyMDhzOTMuMSAyMDggMjA4IDIwOGM0OC4zIDAgOTIuNy0xNi40IDEyOC00NHYxNi4zYzAgNi40IDIuNSAxMi41IDcgMTdsOTkuNyA5OS43YzkuNCA5LjQgMjQuNiA5LjQgMzMuOSAwbDI4LjMtMjguM2M5LjQtOS40IDkuNC0yNC42LjEtMzR6TTIwOCAzMzZjLTcwLjcgMC0xMjgtNTcuMi0xMjgtMTI4IDAtNzAuNyA1Ny4yLTEyOCAxMjgtMTI4IDcwLjcgMCAxMjggNTcuMiAxMjggMTI4IDAgNzAuNy01Ny4yIDEyOC0xMjggMTI4eiI+PC9wYXRoPjwvc3ZnPg==");
-  background-size: 15px, 50%;
-  background-position: center right;
-  background-position: center right 10px, center right 38px;
-  background-repeat: no-repeat;
+.xeph-input:focus {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #3491fe;
+    border-radius: 1px;
+    border-bottom: 1px solid #0176fe !important;
+    height: 30px;
+    padding: 6px 12px;
+    outline: none;
 }
 
-.xeph-input:placeholder-shown{
-  font-style:italic !important;
+.input-search {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJzZWFyY2giIGNsYXNzPSJzdmctaW5saW5lLS1mYSBmYS1zZWFyY2ggZmEtdy0xNiIgcm9sZT0iaW1nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik01MDUgNDQyLjdMNDA1LjMgMzQzYy00LjUtNC41LTEwLjYtNy0xNy03SDM3MmMyNy42LTM1LjMgNDQtNzkuNyA0NC0xMjhDNDE2IDkzLjEgMzIyLjkgMCAyMDggMFMwIDkzLjEgMCAyMDhzOTMuMSAyMDggMjA4IDIwOGM0OC4zIDAgOTIuNy0xNi40IDEyOC00NHYxNi4zYzAgNi40IDIuNSAxMi41IDcgMTdsOTkuNyA5OS43YzkuNCA5LjQgMjQuNiA5LjQgMzMuOSAwbDI4LjMtMjguM2M5LjQtOS40IDkuNC0yNC42LjEtMzR6TTIwOCAzMzZjLTcwLjcgMC0xMjgtNTcuMi0xMjgtMTI4IDAtNzAuNyA1Ny4yLTEyOCAxMjgtMTI4IDcwLjcgMCAxMjggNTcuMiAxMjggMTI4IDAgNzAuNy01Ny4yIDEyOC0xMjggMTI4eiI+PC9wYXRoPjwvc3ZnPg==");
+    background-size: 13px;
+    background-position: center right;
+    background-position: center right 30px, center right 38px;
+    background-repeat: no-repeat;
 }
+
+.xeph-input:placeholder-shown {}
 
 .xeph-ul {
-  margin: 0;
-  list-style: none;
-  border-bottom: 1px #d9e3eb  solid;
-  border-left: 1px #d9e3eb  solid;
-  border-right: 1px #d9e3eb  solid;
-  background-color: white;
-  position: absolute;
-  padding: 0;
-  z-index: 3;
-  width: 97%;
+    margin: 0;
+    list-style: none;
+    background-color: white;
+    position: absolute;
+    padding: 0;
+    z-index: 3;
+    width: 97%;
 }
 
 .xeph-li {
-  color: #59636d;
-  font-family: "Proxima Nova", Helvetica, Arial, sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  padding: 10px;
+    color: #59636d;
+    font-family: "Proxima Nova", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px;
 }
 
 .xeph-li:hover {
-  cursor: pointer;
-  background-color: #f9fbfc ;
-  color: #0176fe;
+    cursor: pointer;
+    background-color: #f9fbfc;
+    color: #0176fe;
 }
 
 .xeph-selected {
-  background-color: #f9fbfc ;
-  color: #0176fe;
+    background-color: #f9fbfc;
+    color: #0176fe;
 }

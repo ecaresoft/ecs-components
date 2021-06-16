@@ -197,7 +197,7 @@ export class AutoComplete {
     return (
       <div class='xeph-div'>
         <input
-          class='xeph-input input-serach'
+          class='xeph-input input-search'
           type="text"
           placeholder={ this.placeholder }
           value={this.inputValue}
