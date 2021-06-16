@@ -153,7 +153,7 @@ export class VaccinationModule {
           { this.show_print &&
             <div class="print-btn-container">
               <button class="icon-print" onClick={ () => this.printVaccinationCard() } 
-                aria-label="pritn vacine card"/>
+                aria-label="print vaccine card"/>
             </div>
           }
         </div>
