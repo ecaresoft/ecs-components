@@ -104,7 +104,7 @@ export class VaccineTable {
 
   private vaccineNameInputStyle(){
     return {
-      'width': '300px',
+      'width': '88%',
       'height': '30px',
       'margin-top': '-15px',
       'font-size': '12px',
@@ -239,7 +239,7 @@ export class VaccineTable {
                       </button>
                     </div> :
                     <div class="btn-group">
-                      <button class="icon-edit"
+                      <button class="icon-edit" 
                         onClick={() => this.editVaccine(index)}></button>
                       <button class="icon-trash"
                         onClick={() => this.deleteVaccineApplication(vaccine)}></button>

@@ -6,7 +6,9 @@ import { todayStringDate } from '../utils/utils';
 
 @Component({
   tag: 'vaccination-module',
-  styleUrl: 'vaccination-module.scss',
+  styleUrls: [
+    'vaccination-module.scss'
+  ],
   shadow: false
 })
 
@@ -149,11 +151,14 @@ export class VaccinationModule {
     return (
       <div class="vaccination-module">
         <div class="vaccination-module-head">
-          <div class="title"> { this.translations.title } </div>
+          <div class="title"> { this.translations.title } </div>          
+          
           { this.show_print &&
             <div class="print-btn-container">
               <button class="icon-print" onClick={ () => this.printVaccinationCard() } 
-                aria-label="print vaccine card"/>
+                aria-label="print vaccine card">
+                {/* <i class="fas fa-print"></i> */}
+              </button>
             </div>
           }
         </div>
