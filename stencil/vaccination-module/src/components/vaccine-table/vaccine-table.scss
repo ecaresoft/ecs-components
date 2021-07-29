@@ -253,7 +253,7 @@
     
     .date-picker {
         width: 30%;
-        margin-left: -10px;
+        margin-left: 10px;
         margin-top: 12px;
     }
     
@@ -262,7 +262,8 @@
     }
     
     .input-item {
-        width: 86%;
+        width: 82%;
+        margin-left: 30px;
     }
     
     .tag-vaccine-name {
@@ -288,7 +289,7 @@
     .application-date-input {
         height: 30px;
         font-size: 14px;
-        width: 60%;
+        width: 94%;
         border: 1px solid $border_color;
         padding: 6px 12px;
         border-radius: 1px;
